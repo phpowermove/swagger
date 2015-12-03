@@ -1,5 +1,5 @@
 <?php
-namespace gossi\swagger\tags;
+namespace gossi\swagger\parts;
 
 use phootwork\collection\Map;
 use phootwork\collection\ArrayList;

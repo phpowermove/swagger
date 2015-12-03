@@ -1,5 +1,5 @@
 <?php
-namespace gossi\swagger\responses;
+namespace gossi\swagger\parts;
 
 use gossi\swagger\Response;
 use phootwork\collection\Map;

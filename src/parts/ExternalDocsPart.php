@@ -9,7 +9,7 @@ trait ExternalDocsPart {
 	private $externalDocs;
 	
 	private function parseExternalDocs(Map $data) {
-		$this->externalDocs = new ExternalDocs($data->get('externalDocs'));
+		$this->externalDocs = new ExternalDocs($data->get('externalDocs', new Map()));
 	}
 	
 	/**

@@ -4,11 +4,11 @@ namespace gossi\swagger;
 use gossi\swagger\parts\ConsumesPart;
 use gossi\swagger\parts\ExtensionPart;
 use gossi\swagger\parts\ExternalDocsPart;
+use gossi\swagger\parts\ParametersPart;
 use gossi\swagger\parts\ProducesPart;
+use gossi\swagger\parts\ResponsesPart;
+use gossi\swagger\parts\TagsPart;
 use phootwork\collection\CollectionUtils;
-use gossi\swagger\tags\TagsPart;
-use gossi\swagger\parameters\ParametersPart;
-use gossi\swagger\responses\ResponsesPart;
 use phootwork\lang\Arrayable;
 
 class Operation implements Arrayable {

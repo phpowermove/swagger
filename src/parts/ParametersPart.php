@@ -1,5 +1,5 @@
 <?php
-namespace gossi\swagger\parameters;
+namespace gossi\swagger\parts;
 
 use gossi\swagger\Parameters;
 use phootwork\collection\Map;

@@ -1,14 +1,14 @@
 <?php
 namespace gossi\swagger;
 
-use gossi\swagger\parameters\ParametersPart;
 use gossi\swagger\parts\ConsumesPart;
 use gossi\swagger\parts\ExtensionPart;
 use gossi\swagger\parts\ExternalDocsPart;
+use gossi\swagger\parts\ParametersPart;
 use gossi\swagger\parts\ProducesPart;
+use gossi\swagger\parts\ResponsesPart;
 use gossi\swagger\parts\SchemesPart;
-use gossi\swagger\responses\ResponsesPart;
-use gossi\swagger\tags\TagsPart;
+use gossi\swagger\parts\TagsPart;
 use phootwork\collection\CollectionUtils;
 use phootwork\collection\Map;
 use phootwork\file\exception\FileNotFoundException;
@@ -17,8 +17,7 @@ use phootwork\json\Json;
 use phootwork\lang\Arrayable;
 
 class Swagger implements Arrayable {
-	
-	
+
 	use SchemesPart;
 	use ConsumesPart;
 	use ProducesPart;
@@ -27,7 +26,6 @@ class Swagger implements Arrayable {
 	use ResponsesPart;
 	use ExternalDocsPart;
 	use ExtensionPart;
-
 	
 	/** @var string */
 	private $version = '2.0';

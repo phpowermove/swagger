@@ -1,0 +1,172 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "da5137d70d6d31a949241e8ed408d182",
+    "content-hash": "dd537f66ff821e4b0c8b7ece024b4b3e",
+    "packages": [
+        {
+            "name": "phootwork/collection",
+            "version": "v1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phootwork/collection.git",
+                "reference": "14e9dee4b514c76972209e873852aa3bbf3fb552"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phootwork/collection/zipball/14e9dee4b514c76972209e873852aa3bbf3fb552",
+                "reference": "14e9dee4b514c76972209e873852aa3bbf3fb552",
+                "shasum": ""
+            },
+            "require": {
+                "phootwork/lang": "~0",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4",
+                "sami/sami": "~3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "phootwork\\collection\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHP Collections library (List, Set, Map, Queue & Stack)",
+            "keywords": [
+                "collection",
+                "collections",
+                "list",
+                "map",
+                "queue",
+                "set",
+                "stack"
+            ],
+            "time": "2015-11-06 17:48:19"
+        },
+        {
+            "name": "phootwork/file",
+            "version": "v0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phootwork/file.git",
+                "reference": "9142dcbf10fce313f568306496f13977985c3d83"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phootwork/file/zipball/9142dcbf10fce313f568306496f13977985c3d83",
+                "reference": "9142dcbf10fce313f568306496f13977985c3d83",
+                "shasum": ""
+            },
+            "require": {
+                "phootwork/lang": "~0",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "~1",
+                "phpunit/phpunit": "~4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "phootwork\\file\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "File Operations for the local Filesystem",
+            "keywords": [
+                "file",
+                "filesystem"
+            ],
+            "time": "2015-06-23 13:43:58"
+        },
+        {
+            "name": "phootwork/json",
+            "version": "v1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phootwork/json.git",
+                "reference": "4e50d73285dcc217dab314350f74978f883417be"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phootwork/json/zipball/4e50d73285dcc217dab314350f74978f883417be",
+                "reference": "4e50d73285dcc217dab314350f74978f883417be",
+                "shasum": ""
+            },
+            "require": {
+                "phootwork/collection": "~1",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "phootwork\\json\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHP json wrapper library",
+            "keywords": [
+                "json"
+            ],
+            "time": "2015-05-19 14:11:00"
+        },
+        {
+            "name": "phootwork/lang",
+            "version": "v0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phootwork/lang.git",
+                "reference": "7410bbc56bb98cd47dcded81b7dfbfd3be311782"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phootwork/lang/zipball/7410bbc56bb98cd47dcded81b7dfbfd3be311782",
+                "reference": "7410bbc56bb98cd47dcded81b7dfbfd3be311782",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "phootwork\\lang\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "(Missing) PHP features represented by objects",
+            "time": "2015-06-23 13:11:40"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="vendor/phootwork/lang/src"/>
+	<buildpathentry kind="src" path="vendor/phootwork/collection/src"/>
+	<buildpathentry kind="src" path="vendor/phootwork/json/src"/>
+	<buildpathentry kind="src" path="src"/>
+	<buildpathentry kind="src" path="vendor/phootwork/file/src"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+	<buildpathentry kind="src" path="vendor/composer"/>
+</buildpath>

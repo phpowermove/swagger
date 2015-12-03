@@ -1,0 +1,78 @@
+<?php
+namespace gossi\swagger;
+
+use gossi\swagger\parts\ExtensionPart;
+use phootwork\collection\CollectionUtils;
+use phootwork\collection\Map;
+
+class Path {
+	
+	use ExtensionPart;
+	
+	private $operations;
+	
+	/** @var string */
+	private $path;
+	
+	public function __construct($path, $contents = []) {
+		$this->path = $path;
+		$this->operations = new Map();
+		$this->parse($contents);
+	}
+	
+	private function parse($contents = []) {
+		$data = CollectionUtils::toMap($contents);
+		$methods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch'];
+		
+		foreach ($methods as $method) {
+			if ($data->has($method)) {
+				$this->operations->set($method, new Operation($data->get($method)));
+			}
+		}
+		
+		// parts
+		$this->parseExtensions($data);
+	}
+	
+	/**
+	 * Returns this path
+	 * 
+	 * @return string
+	 */
+	public function getPath() {
+		return $this->path;
+	}
+	
+	/**
+	 * Gets the operation for the given method, creates one if none exists
+	 * 
+	 * @param string $method
+	 * @return Operation
+	 */
+	public function getOperation($method) {
+		if (!$this->operations->has($method)) {
+			$this->operations->set($method, new Operation());
+		}
+		
+		return $this->operations->get($method);
+	}
+	
+	/**
+	 * 
+	 * @param string $method
+	 * @return boolean
+	 */
+	public function hasOperation($method) {
+		return $this->operations->has($method);
+	}
+	
+	/**
+	 * Removes an operation for the given method
+	 * 
+	 * @param string $method
+	 */
+	public function removeOperation($method) {
+		$this->operations->remove($method);
+	}
+
+}

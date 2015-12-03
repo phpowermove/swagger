@@ -1,0 +1,22 @@
+{
+	"name" : "gossi/swagger",
+	"description" : "A php library to manipulate swagger specifications",
+	"type" : "library",
+	"license" : "MIT",
+	"authors" : [{
+			"name" : "gossi",
+			"email" : "github@gos.si"
+		}
+	],
+	"autoload" : {
+		"psr-4" : {
+			"gossi\\swagger\\" : "src/"
+		}
+	},
+	"require" : {
+		"php": ">=5.4",
+		"phootwork/file" : "~0",
+		"phootwork/collection" : "~1",
+		"phootwork/json" : "~1"
+	}
+}

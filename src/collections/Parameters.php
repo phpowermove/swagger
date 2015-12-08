@@ -14,8 +14,8 @@ class Parameters implements Arrayable {
 	/** @var ArrayList */
 	private $parameters;
 	
-	public function __construct($contents = []) {
-		$this->parse($contents);
+	public function __construct($contents = null) {
+		$this->parse($contents === null ? new ArrayList() : $contents);
 	}
 	
 	private function parse($contents) {
@@ -29,7 +29,6 @@ class Parameters implements Arrayable {
 				$this->parameters->add(new Parameter($param));
 			}
 		}
-		
 	}
 	
 	public function toArray() {

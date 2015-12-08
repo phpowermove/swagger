@@ -24,5 +24,18 @@ trait TagsPart {
 	public function getTags() {
 		return $this->tags;
 	}
+	
+	protected function exportTags() {
+		$out = [];
+		foreach ($this->tags as $tag) {
+			if ($tag->isObject()) {
+				$out[] = $tag->toArray();
+			} else {
+				$out[] = $tag->getName();
+			}
+		}
+		
+		return $out;
+	}
 
 }

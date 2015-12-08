@@ -5,7 +5,7 @@ use gossi\swagger\parts\ExtensionPart;
 use phootwork\collection\CollectionUtils;
 use phootwork\lang\Arrayable;
 
-class Contact implements Arrayable {
+class Contact extends AbstractModel implements Arrayable {
 	
 	use ExtensionPart;
 	
@@ -34,7 +34,7 @@ class Contact implements Arrayable {
 	}
 	
 	public function toArray() {
-		
+		return $this->export('name', 'url', 'email');
 	}
 	
 	/**

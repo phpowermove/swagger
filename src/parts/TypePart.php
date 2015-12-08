@@ -54,6 +54,7 @@ trait TypePart {
 	private $multipleOf;
 	
 	private function parseType(Map $data) {
+		$this->type = $data->get('type');
 		$this->format = $data->get('format');
 		$this->collectionFormat = $data->get('collectionFormat');
 		$this->default = $data->get('default');
@@ -69,6 +70,13 @@ trait TypePart {
 		$this->uniqueItems = $data->has('uniqueItems') && $data->get('uniqueItems');
 		$this->enum = $data->get('enum');
 		$this->multipleOf = $data->get('multipleOf');
+	}
+	
+	private function getTypeExportFields() {
+		return ['type', 'format', 'collectionFormat', 'default', 'maximum', 'exclusiveMaximum',
+			'minimum', 'exclusiveMinimum', 'maxLength', 'minLength', 'pattern', 'maxItems',
+			'minItems', 'uniqueItems', 'enum', 'multipleOf'
+		];
 	}
 
 	/**

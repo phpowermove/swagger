@@ -10,8 +10,10 @@ use phootwork\collection\CollectionUtils;
 use gossi\swagger\parts\RefPart;
 use phootwork\collection\ArrayList;
 use gossi\swagger\collections\Definitions;
+use phootwork\lang\Arrayable;
+use phootwork\collection\Map;
 
-class Schema {
+class Schema extends AbstractModel implements Arrayable {
 	
 	use RefPart;
 	use TypePart;
@@ -35,6 +37,9 @@ class Schema {
 	/** @var string */
 	private $example;
 	
+	/** @var ArrayList|boolean */
+	private $required;
+	
 	/** @var Definitions */
 	private $properties;
 	
@@ -44,8 +49,8 @@ class Schema {
 	/** @var Schema */
 	private $additionalProperties;
 	
-	public function __construct($contents = []) {
-		$this->parse($contents);
+	public function __construct($contents = null) {
+		$this->parse($contents === null ? new Map() : $contents);
 	}
 	
 	private function parse($contents = []) {
@@ -55,8 +60,11 @@ class Schema {
 		$this->discriminator = $data->get('discriminator');
 		$this->readOnly = $data->has('readOnly') && $data->get('readOnly');
 		$this->example = $data->get('example');
+		$this->required = $data->get('required');
 		$this->properties = new Definitions($data->get('properties'));
-		$this->additionalProperties = new Schema($data->get('additionalProperties'));
+		if ($data->has('additionalProperties')) {
+			$this->additionalProperties = new Schema($data->get('additionalProperties'));
+		}
 		
 		$this->allOf = new ArrayList();
 		if ($data->has('allOf')) {
@@ -72,6 +80,12 @@ class Schema {
 		$this->parseItems($data);
 		$this->parseExternalDocs($data);
 		$this->parseExtensions($data);
+	}
+	
+	public function toArray() {
+		return $this->export('title', 'discriminator', 'description', 'readOnly', 'example', 
+				'externalDocs', $this->getTypeExportFields(), 'items', 'required',
+				'properties', 'additionalProperties', 'allOf');
 	}
 	
 	/**
@@ -182,6 +196,9 @@ class Schema {
 	 * @return Schema
 	 */
 	public function getAdditionalProperties() {
+		if ($this->additionalProperties === null) {
+			$this->additionalProperties = new Schema();
+		}
 		return $this->additionalProperties;
 	}
 

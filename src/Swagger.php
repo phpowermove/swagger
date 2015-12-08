@@ -18,7 +18,7 @@ use phootwork\lang\Arrayable;
 use gossi\swagger\collections\Paths;
 use gossi\swagger\collections\Definitions;
 
-class Swagger implements Arrayable {
+class Swagger extends AbstractModel implements Arrayable {
 
 	use SchemesPart;
 	use ConsumesPart;
@@ -29,8 +29,25 @@ class Swagger implements Arrayable {
 	use ExternalDocsPart;
 	use ExtensionPart;
 	
+	const T_INTEGER = 'integer';
+	const T_NUMBER = 'number';
+	const T_BOOLEAN = 'boolean';
+	const T_STRING = 'string';
+	const T_FILE = 'file';
+	
+	const F_INT32 = 'int32';
+	const F_INT64 = 'int64';
+	const F_FLOAT = 'float';
+	const F_DOUBLE = 'double';
+	const F_STRING = 'string';
+	const F_BYTE = 'byte';
+	const F_BINARY = 'binary';
+	const F_DATE = 'date';
+	const F_DATETIME = 'date-time';
+	const F_PASSWORD = 'password';
+	
 	/** @var string */
-	private $version = '2.0';
+	private $swagger = '2.0';
 	
 	/** @var Info */
 	private $info;
@@ -76,11 +93,11 @@ class Swagger implements Arrayable {
 	private function parse($contents) {
 		$data = CollectionUtils::toMap($contents);
 		
-		$this->version = $data->get('version', $this->version);
+		$this->swagger = $data->get('version', $this->swagger);
 		$this->host = $data->get('host');
 		$this->basePath = $data->get('basePath');
 		$this->info = new Info($data->get('info', []));
-		$this->paths = new Paths($data->get('paths', new Map()));
+		$this->paths = new Paths($data->get('paths'));
 		$this->definitions = new Definitions($data->get('definitions', new Map()));
 		
 		// security schemes
@@ -101,7 +118,9 @@ class Swagger implements Arrayable {
 	}
 	
 	public function toArray() {
-		
+		return $this->export('swagger', 'info', 'host', 'basePath', 'schemes', 'consumes', 'produces',
+			'paths', 'definitions', 'parameters', 'responses', 'tags', 'externalDocs' 
+		);
 	}
 	
 	/**
@@ -109,7 +128,7 @@ class Swagger implements Arrayable {
 	 * @return string
 	 */
 	public function getVersion() {
-		return $this->version;
+		return $this->swagger;
 	}
 	
 	/**
@@ -118,7 +137,7 @@ class Swagger implements Arrayable {
 	 * @return $this
 	 */
 	public function setVersion($version) {
-		$this->version = $version;
+		$this->swagger = $version;
 		return $this;
 	}
 	

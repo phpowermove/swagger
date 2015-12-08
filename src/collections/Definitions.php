@@ -11,8 +11,8 @@ class Definitions implements Arrayable {
 	/** @var Map */
 	private $definitions;
 
-	public function __construct($contents = []) {
-		$this->parse($contents);
+	public function __construct($contents = null) {
+		$this->parse($contents === null ? new Map() : $contents);
 	}
 	
 	private function parse($contents) {

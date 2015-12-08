@@ -6,7 +6,7 @@ use phootwork\collection\CollectionUtils;
 use phootwork\collection\Map;
 use phootwork\lang\Arrayable;
 
-class Info implements Arrayable {
+class Info extends AbstractModel implements Arrayable {
 	
 	use ExtensionPart;
 	
@@ -17,7 +17,7 @@ class Info implements Arrayable {
 	private $description;
 	
 	/** @var string */
-	private $terms;
+	private $termsOfService;
 	
 	/** @var Contact */
 	private $contact;
@@ -37,7 +37,7 @@ class Info implements Arrayable {
 	
 		$this->title = $data->get('title');
 		$this->description = $data->get('description');
-		$this->terms = $data->get('terms');
+		$this->termsOfService = $data->get('termsOfService');
 		$this->contact = new Contact($data->get('contact', new Map()));
 		$this->license = new License($data->get('license', new Map()));
 		$this->version = $data->get('version');
@@ -47,7 +47,7 @@ class Info implements Arrayable {
 	}
 	
 	public function toArray() {
-		
+		return $this->export('version', 'title', 'description', 'termsOfService', 'contact', 'license');
 	}
 	
 	/**
@@ -91,7 +91,7 @@ class Info implements Arrayable {
 	 * @return string
 	 */
 	public function getTerms() {
-		return $this->terms;
+		return $this->termsOfService;
 	}
 	
 	/**
@@ -100,7 +100,7 @@ class Info implements Arrayable {
 	 * @return $this
 	 */
 	public function setTerms($terms) {
-		$this->terms = $terms;
+		$this->termsOfService = $terms;
 		return $this;
 	}
 	

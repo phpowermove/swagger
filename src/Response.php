@@ -7,8 +7,10 @@ use gossi\swagger\parts\SchemaPart;
 use phootwork\collection\Map;
 use gossi\swagger\parts\RefPart;
 use gossi\swagger\parts\ExtensionPart;
+use phootwork\lang\Arrayable;
+use gossi\swagger\collections\Headers;
 
-class Response {
+class Response extends AbstractModel implements Arrayable {
 	
 	use RefPart;
 	use DescriptionPart;
@@ -21,6 +23,9 @@ class Response {
 	/** @var Map */
 	private $examples;
 	
+	/** @var Headers */
+	private $headers;
+	
 	public function __construct($code, $contents = []) {
 		$this->code = $code;
 		$this->parse($contents);
@@ -30,12 +35,17 @@ class Response {
 		$data = CollectionUtils::toMap($contents);
 		
 		$this->examples = $data->get('examples', new Map());
+		$this->headers = new Headers($data->get('headers'));
 		
 		// parts
 		$this->parseRef($data);
 		$this->parseDescription($data);
 		$this->parseSchema($data);
 		$this->parseExtensions($data);
+	}
+	
+	public function toArray() {
+		return $this->export('description', 'schema', 'headers', 'examples');
 	}
 
 	/**

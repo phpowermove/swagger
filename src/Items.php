@@ -6,9 +6,11 @@ use gossi\swagger\parts\ItemsPart;
 use gossi\swagger\parts\TypePart;
 use phootwork\collection\CollectionUtils;
 use phootwork\lang\Arrayable;
+use gossi\swagger\parts\RefPart;
 
-class Items implements Arrayable {
+class Items extends AbstractModel implements Arrayable {
 	
+	use RefPart;
 	use TypePart;
 	use ItemsPart;
 	use ExtensionPart;
@@ -21,13 +23,14 @@ class Items implements Arrayable {
 		$data = CollectionUtils::toMap($contents);
 
 		// parts
+		$this->parseRef($data);
 		$this->parseType($data);
 		$this->parseItems($data);
 		$this->parseExtensions($data);
 	}
 	
 	public function toArray() {
-		
+		return $this->export($this->getTypeExportFields(), 'items');
 	}
 
 }

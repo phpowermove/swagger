@@ -5,7 +5,7 @@ use gossi\swagger\parts\ExtensionPart;
 use phootwork\collection\CollectionUtils;
 use phootwork\lang\Arrayable;
 
-class License implements Arrayable {
+class License extends AbstractModel implements Arrayable {
 	
 	use ExtensionPart;
 	
@@ -30,7 +30,7 @@ class License implements Arrayable {
 	}
 	
 	public function toArray() {
-		
+		return $this->export('name', 'url');
 	}
 	
 	/**

@@ -3,10 +3,10 @@ namespace gossi\swagger\collections;
 
 use gossi\swagger\parts\ExtensionPart;
 use gossi\swagger\Path;
-use phootwork\collection\CollectionUtils;
 use phootwork\collection\Map;
 use phootwork\lang\Arrayable;
 use phootwork\lang\Text;
+use phootwork\collection\CollectionUtils;
 
 class Paths implements Arrayable {
 	
@@ -15,13 +15,13 @@ class Paths implements Arrayable {
 	/** @var Map */
 	private $paths;
 
-	public function __construct($contents = []) {
-		$this->parse($contents);
+	public function __construct($contents = null) {
+		$this->parse($contents === null ? new Map() : $contents);
 	}
 	
 	private function parse($contents) {
 		$data = CollectionUtils::toMap($contents);
-
+		
 		// paths
 		$this->paths = new Map();
 		foreach ($data as $p => $path) {
@@ -31,11 +31,11 @@ class Paths implements Arrayable {
 		}
 
 		// extensions
-// 		$this->parseExtensions($data);
+		$this->parseExtensions($data);
 	}
 	
 	public function toArray() {
-		
+		return array_merge($this->paths->toArray(), $this->getExtensions()->toArray());
 	}
 	
 	/**

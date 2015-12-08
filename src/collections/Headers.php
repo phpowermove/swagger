@@ -11,8 +11,8 @@ class Headers implements Arrayable {
 	/** @var Map */
 	private $headers;
 	
-	public function __construct($contents = []) {
-		$this->parse($contents);
+	public function __construct($contents = null) {
+		$this->parse($contents === null ? new Map() : $contents);
 	}
 	
 	private function parse($contents) {
@@ -20,8 +20,8 @@ class Headers implements Arrayable {
 
 		// headers
 		$this->headers = new Map();
-		foreach ($data as $h => $header) {
-			$this->headers->set($h, new Header($header));
+		foreach ($data as $h => $props) {
+			$this->headers->set($h, new Header($h, $props));
 		}
 	}
 	

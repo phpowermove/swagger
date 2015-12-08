@@ -3,36 +3,52 @@ namespace gossi\swagger;
 
 use phootwork\collection\CollectionUtils;
 use gossi\swagger\parts\ExtensionPart;
+use phootwork\lang\Arrayable;
+use gossi\swagger\parts\ExternalDocsPart;
+use gossi\swagger\parts\DescriptionPart;
 
-class Tag {
+class Tag extends AbstractModel implements Arrayable {
 	
+	use DescriptionPart;
+	use ExternalDocsPart;
 	use ExtensionPart;
 	
 	/** @var string */
 	private $name;
 	
-	/** @var string */
-	private $description;
-	
-	/** @var ExternalDocs */
-	private $externalDocs;
+	private $isObject = true;
 	
 	public function __construct($contents = []) {
 		$this->parse($contents);
 	}
 	
 	private function parse($contents = []) {
-		$data = CollectionUtils::toMap($contents);
-		
-		$this->name = $data->get('name');
-		$this->description = $data->get('description');
-		
-		if ($data->has('externalDocs')) {
-			$this->externalDocs = new ExternalDocs($data->get('externalDocs'));
+		if (is_string($contents)) {
+			$this->isObject = false;
+			$this->name = $contents;
+		} else {
+			$data = CollectionUtils::toMap($contents);
+			
+			$this->isObject = true;
+			$this->name = $data->get('name');
+			
+			// parts
+			$this->parseDescription($data);
+			$this->parseExternalDocs($data);
+			$this->parseExtensions($data);
 		}
-		
-		// extensions
-		$this->parseExtensions($data);
+	}
+	
+	public function toArray() {
+		return $this->export('name', 'description', 'externalDocs');
+	}
+	
+	public function isObject() {
+		return $this->isObject;
+	}
+	
+	public function setObject($object) {
+		$this->isObject = $object;
 	}
 	
 	/**
@@ -49,40 +65,6 @@ class Tag {
 	 */
 	public function setName($name) {
 		$this->name = $name;
-		return $this;
-	}
-	
-	/**
-	 *
-	 * @return string
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
-	
-	/**
-	 *
-	 * @param string $description
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
-		return $this;
-	}
-	
-	/**
-	 *
-	 * @return ExternalDocs
-	 */
-	public function getExternalDocs() {
-		return $this->externalDocs;
-	}
-	
-	/**
-	 *
-	 * @param ExternalDocs $externalDocs        	
-	 */
-	public function setExternalDocs(ExternalDocs $externalDocs) {
-		$this->externalDocs = $externalDocs;
 		return $this;
 	}
 	

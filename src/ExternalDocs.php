@@ -5,7 +5,7 @@ use gossi\swagger\parts\ExtensionPart;
 use phootwork\collection\CollectionUtils;
 use phootwork\lang\Arrayable;
 
-class ExternalDocs implements Arrayable {
+class ExternalDocs extends AbstractModel implements Arrayable {
 	
 	use ExtensionPart;
 	
@@ -30,7 +30,7 @@ class ExternalDocs implements Arrayable {
 	}
 	
 	public function toArray() {
-	
+		return $this->export('description', 'url');
 	}
 	
 	/**

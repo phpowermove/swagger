@@ -11,7 +11,7 @@ use gossi\swagger\parts\TagsPart;
 use phootwork\collection\CollectionUtils;
 use phootwork\lang\Arrayable;
 
-class Operation implements Arrayable {
+class Operation extends AbstractModel implements Arrayable {
 	
 	use ConsumesPart;
 	use ProducesPart;
@@ -56,7 +56,8 @@ class Operation implements Arrayable {
 	}
 	
 	public function toArray() {
-		
+		return $this->export('summary', 'description', 'operationId', 'deprecated', 
+				'consumes', 'produces', 'parameters', 'responses', 'tags', 'externalDocs');
 	}
 	
 	/**

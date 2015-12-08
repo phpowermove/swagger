@@ -15,8 +15,8 @@ class Responses implements Arrayable {
 	/** @var Map */
 	private $responses;
 	
-	public function __construct($contents = []) {
-		$this->parse($contents);
+	public function __construct($contents = null) {
+		$this->parse($contents === null ? new Map() : $contents);
 	}
 	
 	private function parse($contents) {
@@ -35,7 +35,7 @@ class Responses implements Arrayable {
 	}
 	
 	public function toArray() {
-		
+		return array_merge($this->responses->toArray(), $this->getExtensions()->toArray());
 	}
 	
 	/**

@@ -4,8 +4,9 @@ namespace gossi\swagger;
 use gossi\swagger\parts\ExtensionPart;
 use phootwork\collection\CollectionUtils;
 use phootwork\collection\Map;
+use phootwork\lang\Arrayable;
 
-class Path {
+class Path extends AbstractModel implements Arrayable {
 	
 	use ExtensionPart;
 	
@@ -32,6 +33,10 @@ class Path {
 		
 		// parts
 		$this->parseExtensions($data);
+	}
+	
+	public function toArray() {
+		return array_merge($this->operations->toArray(), $this->getExtensions()->toArray());
 	}
 	
 	/**

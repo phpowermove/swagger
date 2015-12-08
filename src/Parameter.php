@@ -9,8 +9,9 @@ use gossi\swagger\parts\TypePart;
 use phootwork\collection\CollectionUtils;
 use gossi\swagger\parts\SchemaPart;
 use gossi\swagger\parts\RefPart;
+use phootwork\lang\Arrayable;
 
-class Parameter {
+class Parameter extends AbstractModel implements Arrayable {
 
 	use RefPart;
 	use DescriptionPart;
@@ -49,6 +50,11 @@ class Parameter {
 		$this->parseType($data);
 		$this->parseItems($data);
 		$this->parseExtensions($data);
+	}
+	
+	public function toArray() {
+		return $this->export('name', 'in', 'allowEmptyValue', 'required', 'description', 'schema',
+				$this->getTypeExportFields(), 'items');
 	}
 	
 	/**

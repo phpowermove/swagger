@@ -29,6 +29,10 @@ class Headers implements Arrayable {
 		return $this->headers->toArray();
 	}
 	
+	public function size() {
+		return $this->headers->size();
+	}
+	
 	/**
 	 * Returns whether a header with the given name exists
 	 * 

@@ -5,16 +5,15 @@ use gossi\swagger\parts\ExtensionPart;
 use phootwork\collection\CollectionUtils;
 use phootwork\collection\Map;
 use phootwork\lang\Arrayable;
+use gossi\swagger\parts\DescriptionPart;
 
 class Info extends AbstractModel implements Arrayable {
 	
+	use DescriptionPart;
 	use ExtensionPart;
 	
 	/** @var string */
 	private $title;
-	
-	/** @var string */	
-	private $description;
 	
 	/** @var string */
 	private $termsOfService;
@@ -36,13 +35,13 @@ class Info extends AbstractModel implements Arrayable {
 		$data = CollectionUtils::toMap($contents);
 	
 		$this->title = $data->get('title');
-		$this->description = $data->get('description');
 		$this->termsOfService = $data->get('termsOfService');
 		$this->contact = new Contact($data->get('contact', new Map()));
 		$this->license = new License($data->get('license', new Map()));
 		$this->version = $data->get('version');
 		
 		// extensions
+		$this->parseDescription($data);
 		$this->parseExtensions($data);
 	}
 	
@@ -65,24 +64,6 @@ class Info extends AbstractModel implements Arrayable {
 	 */
 	public function setTitle($title) {
 		$this->title = $title;
-		return $this;
-	}
-	
-	/**
-	 *
-	 * @return string
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
-	
-	/**
-	 *
-	 * @param string $description
-	 * @return $this
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
 		return $this;
 	}
 	

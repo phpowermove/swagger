@@ -2,11 +2,11 @@
 namespace gossi\swagger\collections;
 
 use gossi\swagger\parts\ExtensionPart;
+use gossi\swagger\Response;
 use phootwork\collection\CollectionUtils;
 use phootwork\collection\Map;
-use phootwork\lang\Text;
 use phootwork\lang\Arrayable;
-use gossi\swagger\Response;
+use phootwork\lang\Text;
 
 class Responses implements Arrayable {
 	
@@ -26,7 +26,7 @@ class Responses implements Arrayable {
 		$this->responses = new Map();
 		foreach ($data as $r => $response) {
 			if (!Text::create($r)->startsWith('x-')) {
-				$this->responses->set(new Response($r, $response));
+				$this->responses->set($r, new Response($r, $response));
 			}
 		}
 		
@@ -35,9 +35,15 @@ class Responses implements Arrayable {
 	}
 	
 	public function toArray() {
-		return array_merge($this->responses->toArray(), $this->getExtensions()->toArray());
+		$responses = clone $this->responses;
+		$responses->setAll($this->getExtensions());
+		return $responses->toArray();
 	}
-	
+
+	public function size() {
+		return $this->responses->size();
+	}
+
 	/**
 	 * Returns whether the given response exists
 	 * 

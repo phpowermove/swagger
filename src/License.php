@@ -4,16 +4,15 @@ namespace gossi\swagger;
 use gossi\swagger\parts\ExtensionPart;
 use phootwork\collection\CollectionUtils;
 use phootwork\lang\Arrayable;
+use gossi\swagger\parts\UrlPart;
 
 class License extends AbstractModel implements Arrayable {
 	
+	use UrlPart;
 	use ExtensionPart;
 	
 	/** @var string */
 	private $name;
-	
-	/** @var string */
-	private $url;
 	
 	public function __construct($contents = []) {
 		$this->parse($contents);
@@ -23,9 +22,9 @@ class License extends AbstractModel implements Arrayable {
 		$data = CollectionUtils::toMap($contents);
 	
 		$this->name = $data->get('name');
-		$this->url = $data->get('url');
-	
+		
 		// extensions
+		$this->parseUrl($data);
 		$this->parseExtensions($data);
 	}
 	
@@ -48,24 +47,6 @@ class License extends AbstractModel implements Arrayable {
 	 */
 	public function setName($name) {
 		$this->name = $name;
-		return $this;
-	}
-	
-	/**
-	 *
-	 * @return string
-	 */
-	public function getUrl() {
-		return $this->url;
-	}
-	
-	/**
-	 *
-	 * @param string $url
-	 * @return $this
-	 */
-	public function setUrl($url) {
-		$this->url = $url;
 		return $this;
 	}
 	

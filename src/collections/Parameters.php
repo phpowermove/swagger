@@ -38,6 +38,10 @@ class Parameters implements Arrayable {
 		
 		return $this->parameters->toArray();
 	}
+	
+	public function size() {
+		return $this->parameters->size();
+	}
 
 	/**
 	 * Find parameter by name

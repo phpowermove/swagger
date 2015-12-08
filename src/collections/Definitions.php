@@ -28,6 +28,10 @@ class Definitions implements Arrayable {
 		return $this->definitions->toArray();
 	}
 	
+	public function size() {
+		return $this->definitions->size();
+	}
+	
 	/**
 	 * Returns the schema for the given field
 	 * 

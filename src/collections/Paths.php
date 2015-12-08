@@ -35,7 +35,13 @@ class Paths implements Arrayable {
 	}
 	
 	public function toArray() {
-		return array_merge($this->paths->toArray(), $this->getExtensions()->toArray());
+		$paths = clone $this->paths;
+		$paths->setAll($this->getExtensions());
+		return $paths->toArray();
+	}
+	
+	public function size() {
+		return $this->paths->size();
 	}
 	
 	/**

@@ -9,6 +9,7 @@ use gossi\swagger\parts\ExternalDocsPart;
 use phootwork\collection\CollectionUtils;
 use gossi\swagger\parts\RefPart;
 use phootwork\collection\ArrayList;
+use gossi\swagger\collections\Definitions;
 
 class Schema {
 	

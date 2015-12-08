@@ -15,6 +15,8 @@ use phootwork\file\exception\FileNotFoundException;
 use phootwork\file\File;
 use phootwork\json\Json;
 use phootwork\lang\Arrayable;
+use gossi\swagger\collections\Paths;
+use gossi\swagger\collections\Definitions;
 
 class Swagger implements Arrayable {
 

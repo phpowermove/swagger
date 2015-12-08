@@ -1,11 +1,12 @@
 <?php
-namespace gossi\swagger;
+namespace gossi\swagger\collections;
 
 use gossi\swagger\parts\ExtensionPart;
 use phootwork\collection\CollectionUtils;
 use phootwork\collection\Map;
 use phootwork\lang\Text;
 use phootwork\lang\Arrayable;
+use gossi\swagger\Response;
 
 class Responses implements Arrayable {
 	
@@ -19,17 +20,18 @@ class Responses implements Arrayable {
 	}
 	
 	private function parse($contents) {
-		$responses = CollectionUtils::toMap($contents);
+		$data = CollectionUtils::toMap($contents);
 
 		// responses
-		foreach ($responses as $r => $response) {
+		$this->responses = new Map();
+		foreach ($data as $r => $response) {
 			if (!Text::create($r)->startsWith('x-')) {
-				$this->responses->set($r, new Response($r, $response));
+				$this->responses->set(new Response($r, $response));
 			}
 		}
 		
 		// extensions
-		$this->parseExtensions($responses);
+		$this->parseExtensions($data);
 	}
 	
 	public function toArray() {
@@ -47,6 +49,16 @@ class Responses implements Arrayable {
 	}
 	
 	/**
+	 * Returns whether the given response exists
+	 * 
+	 * @param Response $response
+	 * @return boolean
+	 */
+	public function contains(Response $response) {
+		return $this->responses->contains($response);
+	}
+	
+	/**
 	 * Returns the reponse info for the given code
 	 * 
 	 * @param string $code
@@ -61,8 +73,8 @@ class Responses implements Arrayable {
 	 * 
 	 * @param Response $code
 	 */
-	public function set(Response $code) {
-		$this->responses->set($code->getCode(), $code);
+	public function set(Response $response) {
+		$this->responses->set($response->getCode(), $response);
 	}
 	
 	/**

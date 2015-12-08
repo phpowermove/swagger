@@ -1,11 +1,12 @@
 <?php
-namespace gossi\swagger;
+namespace gossi\swagger\collections;
 
 use gossi\swagger\parts\ExtensionPart;
+use gossi\swagger\Path;
 use phootwork\collection\CollectionUtils;
 use phootwork\collection\Map;
-use phootwork\lang\Text;
 use phootwork\lang\Arrayable;
+use phootwork\lang\Text;
 
 class Paths implements Arrayable {
 	
@@ -13,23 +14,24 @@ class Paths implements Arrayable {
 	
 	/** @var Map */
 	private $paths;
-	
+
 	public function __construct($contents = []) {
 		$this->parse($contents);
 	}
 	
 	private function parse($contents) {
-		$paths = CollectionUtils::toMap($contents);
+		$data = CollectionUtils::toMap($contents);
 
 		// paths
-		foreach ($paths as $p => $path) {
+		$this->paths = new Map();
+		foreach ($data as $p => $path) {
 			if (!Text::create($p)->startsWith('x-')) {
 				$this->paths->set($p, new Path($p, $path));
 			}
 		}
 
 		// extensions
-		$this->parseExtensions($paths);
+// 		$this->parseExtensions($data);
 	}
 	
 	public function toArray() {
@@ -37,13 +39,23 @@ class Paths implements Arrayable {
 	}
 	
 	/**
-	 * Returns whether the given path exists
+	 * Returns whether a path with the given name exists
 	 * 
 	 * @param string $path
 	 * @return boolean
 	 */
 	public function has($path) {
 		return $this->paths->has($path);
+	}
+	
+	/**
+	 * Returns whether the given path exists
+	 * 
+	 * @param Path $path
+	 * @return boolean
+	 */
+	public function contains(Path $path) {
+		return $this->paths->contains($path);
 	}
 	
 	/**

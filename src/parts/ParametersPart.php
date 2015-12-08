@@ -1,8 +1,8 @@
 <?php
 namespace gossi\swagger\parts;
 
-use gossi\swagger\Parameters;
 use phootwork\collection\Map;
+use gossi\swagger\collections\Parameters;
 
 trait ParametersPart {
 

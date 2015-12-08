@@ -1,8 +1,8 @@
 <?php
 namespace gossi\swagger\parts;
 
-use gossi\swagger\Response;
 use phootwork\collection\Map;
+use gossi\swagger\Response;
 
 trait ResponsesPart {
 	

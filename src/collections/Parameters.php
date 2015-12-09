@@ -44,15 +44,29 @@ class Parameters implements Arrayable {
 	}
 
 	/**
-	 * Find parameter by name
+	 * Searches whether a parameter with the given name exists
+	 * 
+	 * @param string $name
+	 * @return boolean
+	 */
+	public function searchByName($name) {
+		return $this->parameters->search($name, function(Parameter $param, $name) {
+			return $param->getName() == $name;
+		});
+	}
+	
+	/**
+	 * Returns parameter with the given name if it exists
 	 * 
 	 * @param string $name
 	 * @return Parameter
 	 */
 	public function findByName($name) {
-		return $this->search($name, function(Parameter $param, $name) {
-			return $param->getName() == $name;
-		});
+		foreach ($this->parameters as $param) {
+			if ($param->getName() == $name) {
+				return $param;
+			}
+		}
 	}
 	
 	/**

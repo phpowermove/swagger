@@ -78,9 +78,11 @@ class Paths implements Arrayable {
 	 * Sets the path
 	 * 
 	 * @param Path $path
+	 * @return $this
 	 */
-	public function set(Path $path) {
+	public function add(Path $path) {
 		$this->paths->set($path->getPath(), $path);
+		return $this;
 	}
 	
 	/**
@@ -90,5 +92,6 @@ class Paths implements Arrayable {
 	 */
 	public function remove($path) {
 		$this->paths->remove($path);
+		return $this;
 	}
 }

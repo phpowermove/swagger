@@ -64,5 +64,14 @@ class Response extends AbstractModel implements Arrayable {
 	public function getExamples() {
 		return $this->examples;
 	}
+	
+	/**
+	 * Returns headers for this response
+	 * 
+	 * @return Headers
+	 */
+	public function getHeaders() {
+		return $this->headers;
+	}
 
 }

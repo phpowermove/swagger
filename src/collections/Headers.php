@@ -68,8 +68,8 @@ class Headers implements Arrayable {
 	 * 
 	 * @param Header $header
 	 */
-	public function set(Header $header) {
-		$this->headers->set($header->getCode(), $header);
+	public function add(Header $header) {
+		$this->headers->set($header->getHeader(), $header);
 	}
 	
 	/**

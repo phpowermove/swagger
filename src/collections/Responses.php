@@ -79,7 +79,7 @@ class Responses implements Arrayable {
 	 * 
 	 * @param Response $code
 	 */
-	public function set(Response $response) {
+	public function add(Response $response) {
 		$this->responses->set($response->getCode(), $response);
 	}
 	

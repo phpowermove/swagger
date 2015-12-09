@@ -39,6 +39,25 @@ class PetstoreTest extends \PHPUnit_Framework_TestCase {
 		$swagger = Swagger::fromFile($filename);
 		
 		$this->assertEquals($this->fileToArray($filename), $swagger->toArray());
+		
+		$responses = $swagger->getPaths()->get('/pets')->getOperation('get')->getResponses();
+		$headers = $responses->get('200')->getHeaders();
+		
+		$this->assertEquals(1, $headers->size());
+		$this->assertTrue($headers->has('x-expires'));
+		$expires = $headers->get('x-expires');
+		$this->assertTrue($headers->contains($expires));
+		
+		$this->assertEquals('x-expires', $expires->getHeader());
+		$this->assertEquals('string', $expires->getType());
+		
+		$headers->remove('x-expires');
+		$this->assertEquals(0, $headers->size());
+		$this->assertFalse($headers->has('x-expires'));
+		
+		$headers->add($expires);
+		$this->assertEquals(1, $headers->size());
+		$this->assertTrue($headers->has('x-expires'));
 	}
 	
 	public function testExpanded() {

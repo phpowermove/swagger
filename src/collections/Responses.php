@@ -71,6 +71,10 @@ class Responses implements Arrayable {
 	 * @return Response
 	 */
 	public function get($code) {
+		if (!$this->responses->has($code)) {
+			$this->responses->set($code, new Response($code));
+		}
+
 		return $this->responses->get($code);
 	}
 	

@@ -39,6 +39,9 @@ class Definitions implements Arrayable {
 	 * @return Schema
 	 */
 	public function get($name) {
+		if (!$this->definitions->has($name)) {
+			$this->definitions->set($name, new Schema());
+		}
 		return $this->definitions->get($name);
 	}
 	

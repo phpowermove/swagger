@@ -71,6 +71,9 @@ class Paths implements Arrayable {
 	 * @return Path
 	 */
 	public function get($path) {
+		if (!$this->paths->has($path)) {
+			$this->paths->set($path, new Path($path));
+		}
 		return $this->paths->get($path);
 	}
 	

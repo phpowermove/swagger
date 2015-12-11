@@ -59,7 +59,7 @@ class Parameters implements Arrayable {
 	 * Returns parameter with the given name if it exists
 	 * 
 	 * @param string $name
-	 * @return Parameter
+	 * @return Parameter|void
 	 */
 	public function findByName($name) {
 		foreach ($this->parameters as $param) {
@@ -67,6 +67,24 @@ class Parameters implements Arrayable {
 				return $param;
 			}
 		}
+	}
+	
+	/**
+	 * Searches for the parameter with the given name. Creates a parameter with the given name
+	 * if none exists
+	 * 
+	 * @param string $name
+	 * @return Parameter
+	 */
+	public function getByName($name) {
+		$param = $this->findByName($name);
+		if (empty($param)) {
+			$param = new Parameter();
+			$param->setName($name);
+			$this->parameters->add($param);
+		}
+		
+		return $param;
 	}
 	
 	/**

@@ -2,7 +2,7 @@
 	"swagger": "2.0",
 	"paths": {
 		"/users": {
-			"GET": {
+			"get": {
 				"description": "List all users",
 				"operationId": "user-list",
 				"produces": [
@@ -17,7 +17,7 @@
 					}
 				}
 			},
-			"POST": {
+			"post": {
 				"description": "Creates an user",
 				"operationId": "user-create",
 				"produces": [
@@ -42,7 +42,7 @@
 			}
 		},
 		"/users/{id}": {
-			"GET": {
+			"get": {
 				"description": "Reads an user",
 				"operationId": "user-read",
 				"produces": [
@@ -72,7 +72,7 @@
 					}
 				}
 			},
-			"PUT": {
+			"put": {
 				"description": "Updates an user",
 				"operationId": "user-update",
 				"produces": [
@@ -102,7 +102,7 @@
 					}
 				}
 			},
-			"DELETE": {
+			"delete": {
 				"description": "Deletes an user",
 				"operationId": "user-delete",
 				"produces": [

@@ -7,15 +7,15 @@ use phootwork\collection\CollectionUtils;
 use phootwork\lang\Arrayable;
 use gossi\swagger\Parameter;
 
-class Parameters implements Arrayable {
+class Parameters implements Arrayable, \Iterator {
 	
 	use RefPart;
 	
 	/** @var ArrayList */
 	private $parameters;
 	
-	public function __construct($contents = null) {
-		$this->parse($contents === null ? new ArrayList() : $contents);
+	public function __construct($contents = []) {
+		$this->parse($contents === null ? [] : $contents);
 	}
 	
 	private function parse($contents) {
@@ -113,5 +113,25 @@ class Parameters implements Arrayable {
 	 */
 	public function contains(Parameter $param) {
 		return $this->parameters->contains($param);
+	}
+	
+	public function current() {
+		return $this->parameters->current();
+	}
+	
+	public function key() {
+		return $this->parameters->key();
+	}
+	
+	public function next() {
+		return $this->parameters->next();
+	}
+	
+	public function rewind() {
+		return $this->parameters->rewind();
+	}
+	
+	public function valid() {
+		return $this->parameters->valid();
 	}
 }

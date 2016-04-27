@@ -21,11 +21,10 @@ class Path extends AbstractModel implements Arrayable {
 		$this->parse($contents);
 	}
 	
-	private function parse($contents = []) {
+	private function parse($contents) {
 		$data = CollectionUtils::toMap($contents);
-		$methods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch'];
-		
-		foreach ($methods as $method) {
+
+		foreach (Swagger::$METHODS as $method) {
 			if ($data->has($method)) {
 				$this->operations->set($method, new Operation($data->get($method)));
 			}

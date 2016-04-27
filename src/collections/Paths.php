@@ -8,15 +8,15 @@ use phootwork\lang\Arrayable;
 use phootwork\lang\Text;
 use phootwork\collection\CollectionUtils;
 
-class Paths implements Arrayable {
+class Paths implements Arrayable, \Iterator {
 	
 	use ExtensionPart;
 	
 	/** @var Map */
 	private $paths;
 
-	public function __construct($contents = null) {
-		$this->parse($contents === null ? new Map() : $contents);
+	public function __construct($contents = []) {
+		$this->parse($contents === null ? [] : $contents);
 	}
 	
 	private function parse($contents) {
@@ -36,7 +36,7 @@ class Paths implements Arrayable {
 	
 	public function toArray() {
 		$paths = clone $this->paths;
-		$paths->setAll($this->getExtensions());
+// 		$paths->setAll($this->getExtensions());
 		return $paths->toArray();
 	}
 	
@@ -96,5 +96,25 @@ class Paths implements Arrayable {
 	public function remove($path) {
 		$this->paths->remove($path);
 		return $this;
+	}
+	
+	public function current() {
+		return $this->paths->current();
+	}
+	
+	public function key() {
+		return $this->paths->key();
+	}
+	
+	public function next() {
+		return $this->paths->next();
+	}
+	
+	public function rewind() {
+		return $this->paths->rewind();
+	}
+	
+	public function valid() {
+		return $this->paths->valid();
 	}
 }

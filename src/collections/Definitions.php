@@ -6,13 +6,13 @@ use phootwork\collection\CollectionUtils;
 use phootwork\lang\Arrayable;
 use phootwork\collection\Map;
 
-class Definitions implements Arrayable {
+class Definitions implements Arrayable, \Iterator {
 	
 	/** @var Map */
 	private $definitions;
 
-	public function __construct($contents = null) {
-		$this->parse($contents === null ? new Map() : $contents);
+	public function __construct($contents = []) {
+		$this->parse($contents === null ? [] : $contents);
 	}
 	
 	private function parse($contents) {
@@ -82,5 +82,25 @@ class Definitions implements Arrayable {
 	 */
 	public function contains(Schema $schema) {
 		return $this->definitions->contains($schema);
+	}
+	
+	public function current() {
+		return $this->definitions->current();
+	}
+	
+	public function key() {
+		return $this->definitions->key();
+	}
+	
+	public function next() {
+		return $this->definitions->next();
+	}
+	
+	public function rewind() {
+		return $this->definitions->rewind();
+	}
+	
+	public function valid() {
+		return $this->definitions->valid();
 	}
 }

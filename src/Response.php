@@ -31,7 +31,7 @@ class Response extends AbstractModel implements Arrayable {
 		$this->parse($contents);
 	}
 	
-	private function parse($contents = []) {
+	private function parse($contents) {
 		$data = CollectionUtils::toMap($contents);
 		
 		$this->examples = $data->get('examples', new Map());

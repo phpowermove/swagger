@@ -46,6 +46,8 @@ class Swagger extends AbstractModel implements Arrayable {
 	const F_DATETIME = 'date-time';
 	const F_PASSWORD = 'password';
 	
+	public static $METHODS = ['get', 'post', 'put', 'patch', 'delete', 'options', 'head'];
+	
 	/** @var string */
 	private $swagger = '2.0';
 	

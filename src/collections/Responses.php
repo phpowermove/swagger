@@ -8,15 +8,15 @@ use phootwork\collection\Map;
 use phootwork\lang\Arrayable;
 use phootwork\lang\Text;
 
-class Responses implements Arrayable {
+class Responses implements Arrayable, \Iterator {
 	
 	use ExtensionPart;
 	
 	/** @var Map */
 	private $responses;
 	
-	public function __construct($contents = null) {
-		$this->parse($contents === null ? new Map() : $contents);
+	public function __construct($contents = []) {
+		$this->parse($contents === null ? [] : $contents);
 	}
 	
 	private function parse($contents) {
@@ -94,5 +94,25 @@ class Responses implements Arrayable {
 	 */
 	public function remove($code) {
 		$this->responses->remove($code);
+	}
+	
+	public function current() {
+		return $this->responses->current();
+	}
+	
+	public function key() {
+		return $this->responses->key();
+	}
+	
+	public function next() {
+		return $this->responses->next();
+	}
+	
+	public function rewind() {
+		return $this->responses->rewind();
+	}
+	
+	public function valid() {
+		return $this->responses->valid();
 	}
 }

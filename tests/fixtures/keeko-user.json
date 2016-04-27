@@ -1,0 +1,248 @@
+{
+	"swagger": "2.0",
+	"paths": {
+		"/users": {
+			"GET": {
+				"description": "List all users",
+				"operationId": "user-list",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Array of users",
+						"schema": {
+							"$ref": "#/definitions/PagedUsers"
+						}
+					}
+				}
+			},
+			"POST": {
+				"description": "Creates an user",
+				"operationId": "user-create",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "body",
+						"in": "body",
+						"required": true,
+						"description": "The new user",
+						"schema": {
+							"$ref": "#/definitions/WritableUser"
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "user created"
+					}
+				}
+			}
+		},
+		"/users/{id}": {
+			"GET": {
+				"description": "Reads an user",
+				"operationId": "user-read",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"description": "The user id",
+						"type": "integer"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "gets the user",
+						"schema": {
+							"$ref": "#/definitions/User"
+						}
+					},
+					"400": {
+						"description": "Invalid ID supplied"
+					},
+					"404": {
+						"description": "No user found"
+					}
+				}
+			},
+			"PUT": {
+				"description": "Updates an user",
+				"operationId": "user-update",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"description": "The user id",
+						"type": "integer"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "user updated",
+						"schema": {
+							"$ref": "#/definitions/User"
+						}
+					},
+					"400": {
+						"description": "Invalid ID supplied"
+					},
+					"404": {
+						"description": "No user found"
+					}
+				}
+			},
+			"DELETE": {
+				"description": "Deletes an user",
+				"operationId": "user-delete",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"description": "The user id",
+						"type": "integer"
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "user deleted"
+					},
+					"400": {
+						"description": "Invalid ID supplied"
+					},
+					"404": {
+						"description": "No user found"
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"Meta": {
+			"properties": {
+				"total": {
+					"type": "integer"
+				},
+				"first": {
+					"type": "integer"
+				},
+				"next": {
+					"type": "integer"
+				},
+				"previous": {
+					"type": "integer"
+				},
+				"last": {
+					"type": "integer"
+				}
+			}
+		},
+		"PagedUsers": {
+			"properties": {
+				"users": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/User"
+					}
+				},
+				"meta": {
+					"$ref": "#/definitions/Meta"
+				}
+			}
+		},
+		"WritableUser": {
+			"properties": {
+				"id": {
+					"type": "int"
+				},
+				"login_name": {
+					"type": "string"
+				},
+				"password": {
+					"type": "string"
+				},
+				"given_name": {
+					"type": "string"
+				},
+				"family_name": {
+					"type": "string"
+				},
+				"display_name": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string"
+				},
+				"birthday": {
+					"type": "string"
+				},
+				"sex": {
+					"type": "int"
+				},
+				"password_recover_code": {
+					"type": "string"
+				},
+				"password_recover_time": {
+					"type": "string"
+				}
+			}
+		},
+		"User": {
+			"properties": {
+				"id": {
+					"type": "int"
+				},
+				"login_name": {
+					"type": "string"
+				},
+				"password": {
+					"type": "string"
+				},
+				"given_name": {
+					"type": "string"
+				},
+				"family_name": {
+					"type": "string"
+				},
+				"display_name": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string"
+				},
+				"birthday": {
+					"type": "string"
+				},
+				"sex": {
+					"type": "int"
+				},
+				"password_recover_code": {
+					"type": "string"
+				},
+				"password_recover_time": {
+					"type": "string"
+				},
+				"created_at": {
+					"type": "string"
+				},
+				"updated_at": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}

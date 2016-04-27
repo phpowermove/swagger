@@ -6,13 +6,13 @@ use phootwork\collection\CollectionUtils;
 use phootwork\collection\Map;
 use phootwork\lang\Arrayable;
 
-class Headers implements Arrayable {
+class Headers implements Arrayable, \Iterator {
 	
 	/** @var Map */
 	private $headers;
 	
-	public function __construct($contents = null) {
-		$this->parse($contents === null ? new Map() : $contents);
+	public function __construct($contents = []) {
+		$this->parse($contents === null ? [] : $contents);
 	}
 	
 	private function parse($contents) {
@@ -81,4 +81,23 @@ class Headers implements Arrayable {
 		$this->headers->remove($header);
 	}
 	
+	public function current() {
+		return $this->headers->current();
+	}
+	
+	public function key() {
+		return $this->headers->key();
+	}
+	
+	public function next() {
+		return $this->headers->next();
+	}
+	
+	public function rewind() {
+		return $this->headers->rewind();
+	}
+	
+	public function valid() {
+		return $this->headers->valid();
+	}
 }

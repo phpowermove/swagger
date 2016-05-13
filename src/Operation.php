@@ -7,36 +7,38 @@ use gossi\swagger\parts\ExternalDocsPart;
 use gossi\swagger\parts\ParametersPart;
 use gossi\swagger\parts\ProducesPart;
 use gossi\swagger\parts\ResponsesPart;
+use gossi\swagger\parts\SchemesPart;
 use gossi\swagger\parts\TagsPart;
 use phootwork\collection\CollectionUtils;
 use phootwork\lang\Arrayable;
 
 class Operation extends AbstractModel implements Arrayable {
-	
+
 	use ConsumesPart;
 	use ProducesPart;
 	use TagsPart;
 	use ParametersPart;
 	use ResponsesPart;
+	use SchemesPart;
 	use ExternalDocsPart;
 	use ExtensionPart;
-	
+
 	/** @var string */
 	private $summary;
-	
+
 	/** @var string */
 	private $description;
-	
+
 	/** @var string */
 	private $operationId;
-	
+
 	/** @var boolean */
 	private $deprecated = false;
-	
+
 	public function __construct($contents = []) {
 		$this->parse($contents);
 	}
-	
+
 	private function parse($contents = []) {
 		$data = CollectionUtils::toMap($contents);
 
@@ -51,15 +53,17 @@ class Operation extends AbstractModel implements Arrayable {
 		$this->parseTags($data);
 		$this->parseParameters($data);
 		$this->parseResponses($data);
+		$this->parseSchemes($data);
 		$this->parseExternalDocs($data);
 		$this->parseExtensions($data);
 	}
-	
+
 	public function toArray() {
-		return $this->export('summary', 'description', 'operationId', 'deprecated', 
-				'consumes', 'produces', 'parameters', 'responses', 'tags', 'externalDocs');
+		return $this->export('summary', 'description', 'operationId', 'deprecated',
+				'consumes', 'produces', 'parameters', 'responses', 'schemes', 'tags',
+				'externalDocs');
 	}
-	
+
 	/**
 	 *
 	 * @return the string
@@ -67,7 +71,7 @@ class Operation extends AbstractModel implements Arrayable {
 	public function getSummary() {
 		return $this->summary;
 	}
-	
+
 	/**
 	 *
 	 * @param string $summary
@@ -85,7 +89,7 @@ class Operation extends AbstractModel implements Arrayable {
 	public function getDescription() {
 		return $this->description;
 	}
-	
+
 	/**
 	 *
 	 * @param string $description
@@ -94,7 +98,7 @@ class Operation extends AbstractModel implements Arrayable {
 		$this->description = $description;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return string
@@ -102,7 +106,7 @@ class Operation extends AbstractModel implements Arrayable {
 	public function getOperationId() {
 		return $this->operationId;
 	}
-	
+
 	/**
 	 *
 	 * @param string $operationId
@@ -112,7 +116,7 @@ class Operation extends AbstractModel implements Arrayable {
 		$this->operationId = $operationId;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return boolean
@@ -120,7 +124,7 @@ class Operation extends AbstractModel implements Arrayable {
 	public function getDeprecated() {
 		return $this->deprecated;
 	}
-	
+
 	/**
 	 *
 	 * @param boolean $deprecated
@@ -130,6 +134,6 @@ class Operation extends AbstractModel implements Arrayable {
 		$this->deprecated = $deprecated;
 		return $this;
 	}
-	
-	
+
+
 }

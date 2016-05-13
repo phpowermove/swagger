@@ -20,6 +20,7 @@
 			"post": {
 				"description": "Creates an user",
 				"operationId": "user-create",
+				"schemes": ["https", "wss"],
 				"produces": [
 					"application/json"
 				],

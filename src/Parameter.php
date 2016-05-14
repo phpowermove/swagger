@@ -20,27 +20,26 @@ class Parameter extends AbstractModel implements Arrayable {
 	use ItemsPart;
 	use RequiredPart;
 	use ExtensionPart;
-	
+
 	/** @var string */
 	private $name;
-	
+
 	/** @var string */
 	private $in;
-	
+
 	/** @var boolean */
 	private $allowEmptyValue = false;
-	
+
 	public function __construct($contents = []) {
 		$this->parse($contents);
 	}
-	
+
 	private function parse($contents = []) {
 		$data = CollectionUtils::toMap($contents);
-		
+
 		$this->name = $data->get('name');
 		$this->in = $data->get('in');
 		$this->allowEmptyValue = $data->has('allowEmptyValue') && $data->get('allowEmptyValue');
-		
 
 		// parts
 		$this->parseRef($data);
@@ -51,12 +50,12 @@ class Parameter extends AbstractModel implements Arrayable {
 		$this->parseItems($data);
 		$this->parseExtensions($data);
 	}
-	
+
 	public function toArray() {
 		return $this->export('name', 'in', 'allowEmptyValue', 'required', 'description', 'schema',
 				$this->getTypeExportFields(), 'items');
 	}
-	
+
 	/**
 	 *
 	 * @return string
@@ -64,7 +63,7 @@ class Parameter extends AbstractModel implements Arrayable {
 	public function getName() {
 		return $this->name;
 	}
-	
+
 	/**
 	 *
 	 * @param string $name
@@ -73,7 +72,7 @@ class Parameter extends AbstractModel implements Arrayable {
 		$this->name = $name;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return string
@@ -81,7 +80,7 @@ class Parameter extends AbstractModel implements Arrayable {
 	public function getIn() {
 		return $this->in;
 	}
-	
+
 	/**
 	 *
 	 * @param string $in
@@ -90,7 +89,7 @@ class Parameter extends AbstractModel implements Arrayable {
 		$this->in = $in;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return boolean
@@ -98,7 +97,7 @@ class Parameter extends AbstractModel implements Arrayable {
 	public function getAllowEmptyValue() {
 		return $this->allowEmptyValue;
 	}
-	
+
 	/**
 	 * Sets the ability to pass empty-valued parameters. This is valid only for either `query` or 
 	 * `formData` parameters and allows you to send a parameter with a name only or an empty value. 
@@ -110,5 +109,5 @@ class Parameter extends AbstractModel implements Arrayable {
 		$this->allowEmptyValue = $allowEmptyValue;
 		return $this;
 	}
-	
+
 }

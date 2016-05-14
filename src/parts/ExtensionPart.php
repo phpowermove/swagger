@@ -5,9 +5,9 @@ use phootwork\collection\Map;
 use phootwork\lang\Text;
 
 trait ExtensionPart {
-	
+
 	private $extensions;
-	
+
 	private function parseExtensions(Map $data) {
 		$this->extensions = new Map();
 
@@ -18,7 +18,7 @@ trait ExtensionPart {
 			}
 		}
 	}
-	
+
 	/**
 	 * Returns extensions
 	 * 

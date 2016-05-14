@@ -5,13 +5,13 @@ use phootwork\collection\Map;
 use phootwork\collection\Set;
 
 trait ProducesPart {
-	
+
 	private $produces;
-	
+
 	private function parseProduces(Map $data) {
 		$this->produces = $data->get('produces', new Set());
 	}
-	
+
 	/**
 	 * Return produces
 	 *

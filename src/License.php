@@ -7,31 +7,31 @@ use phootwork\lang\Arrayable;
 use gossi\swagger\parts\UrlPart;
 
 class License extends AbstractModel implements Arrayable {
-	
+
 	use UrlPart;
 	use ExtensionPart;
-	
+
 	/** @var string */
 	private $name;
-	
+
 	public function __construct($contents = []) {
 		$this->parse($contents);
 	}
-	
+
 	private function parse($contents = []) {
 		$data = CollectionUtils::toMap($contents);
-	
+
 		$this->name = $data->get('name');
-		
+
 		// extensions
 		$this->parseUrl($data);
 		$this->parseExtensions($data);
 	}
-	
+
 	public function toArray() {
 		return $this->export('name', 'url');
 	}
-	
+
 	/**
 	 *
 	 * @return string
@@ -39,7 +39,7 @@ class License extends AbstractModel implements Arrayable {
 	public function getName() {
 		return $this->name;
 	}
-	
+
 	/**
 	 *
 	 * @param string $name
@@ -49,5 +49,5 @@ class License extends AbstractModel implements Arrayable {
 		$this->name = $name;
 		return $this;
 	}
-	
+
 }

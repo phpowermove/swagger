@@ -135,5 +135,4 @@ class Operation extends AbstractModel implements Arrayable {
 		return $this;
 	}
 
-
 }

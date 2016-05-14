@@ -9,16 +9,16 @@ use phootwork\lang\Arrayable;
 use phootwork\lang\Text;
 
 class Responses implements Arrayable, \Iterator {
-	
+
 	use ExtensionPart;
-	
+
 	/** @var Map */
 	private $responses;
-	
+
 	public function __construct($contents = []) {
 		$this->parse($contents === null ? [] : $contents);
 	}
-	
+
 	private function parse($contents) {
 		$data = CollectionUtils::toMap($contents);
 
@@ -29,11 +29,11 @@ class Responses implements Arrayable, \Iterator {
 				$this->responses->set($r, new Response($r, $response));
 			}
 		}
-		
+
 		// extensions
 		$this->parseExtensions($data);
 	}
-	
+
 	public function toArray() {
 		$responses = clone $this->responses;
 		$responses->setAll($this->getExtensions());
@@ -53,7 +53,7 @@ class Responses implements Arrayable, \Iterator {
 	public function has($code) {
 		return $this->responses->has($code);
 	}
-	
+
 	/**
 	 * Returns whether the given response exists
 	 * 
@@ -63,7 +63,7 @@ class Responses implements Arrayable, \Iterator {
 	public function contains(Response $response) {
 		return $this->responses->contains($response);
 	}
-	
+
 	/**
 	 * Returns the reponse info for the given code
 	 * 
@@ -77,7 +77,7 @@ class Responses implements Arrayable, \Iterator {
 
 		return $this->responses->get($code);
 	}
-	
+
 	/**
 	 * Sets the response
 	 * 
@@ -86,7 +86,7 @@ class Responses implements Arrayable, \Iterator {
 	public function add(Response $response) {
 		$this->responses->set($response->getCode(), $response);
 	}
-	
+
 	/**
 	 * Removes the given repsonse
 	 * 
@@ -95,23 +95,23 @@ class Responses implements Arrayable, \Iterator {
 	public function remove($code) {
 		$this->responses->remove($code);
 	}
-	
+
 	public function current() {
 		return $this->responses->current();
 	}
-	
+
 	public function key() {
 		return $this->responses->key();
 	}
-	
+
 	public function next() {
 		return $this->responses->next();
 	}
-	
+
 	public function rewind() {
 		return $this->responses->rewind();
 	}
-	
+
 	public function valid() {
 		return $this->responses->valid();
 	}

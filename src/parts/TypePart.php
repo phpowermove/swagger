@@ -4,55 +4,55 @@ namespace gossi\swagger\parts;
 use phootwork\collection\Map;
 
 trait TypePart {
-	
+
 	/** @var string */
 	private $type;
-	
+
 	/** @var string */
 	private $format;
-	
+
 	/** @var string */
 	private $collectionFormat;
-	
+
 	/** @var mixed */
 	private $default;
 
 	/** @var float */
 	private $maximum;
-	
+
 	/** @var boolean */
 	private $exclusiveMaximum = false;
-	
+
 	/** @var float */
 	private $minimum;
-	
+
 	/** @var boolean */
 	private $exclusiveMinimum = false;
-	
+
 	/** @var int */
 	private $maxLength;
-	
+
 	/** @var int */
 	private $minLength;
-	
+
 	/** @var string */
 	private $pattern;
-	
+
 	/** @var int */
 	private $maxItems;
-	
+
 	/** @var int */
 	private $minItems;
-	
+
 	/** @var boolean */
 	private $uniqueItems;
-	
+
 	/** @var mixed */
 	private $enum;
-	
+
 	/** @var float */
 	private $multipleOf;
-	
+
 	private function parseType(Map $data) {
 		$this->type = $data->get('type');
 		$this->format = $data->get('format');
@@ -71,7 +71,7 @@ trait TypePart {
 		$this->enum = $data->get('enum');
 		$this->multipleOf = $data->get('multipleOf');
 	}
-	
+
 	private function getTypeExportFields() {
 		return ['type', 'format', 'collectionFormat', 'default', 'maximum', 'exclusiveMaximum',
 			'minimum', 'exclusiveMinimum', 'maxLength', 'minLength', 'pattern', 'maxItems',
@@ -86,7 +86,7 @@ trait TypePart {
 	public function getType() {
 		return $this->type;
 	}
-	
+
 	/**
 	 *
 	 * @param string $type
@@ -96,7 +96,7 @@ trait TypePart {
 		$this->type = $type;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return string
@@ -104,7 +104,7 @@ trait TypePart {
 	public function getFormat() {
 		return $this->format;
 	}
-	
+
 	/**
 	 * Sets the extending format for the type
 	 *
@@ -115,7 +115,7 @@ trait TypePart {
 		$this->format = $format;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return string
@@ -123,7 +123,7 @@ trait TypePart {
 	public function getCollectionFormat() {
 		return $this->collectionFormat;
 	}
-	
+
 	/**
 	 * Determines the format of the array if type array is used. Possible values are:
 	 * 
@@ -144,7 +144,7 @@ trait TypePart {
 		$this->collectionFormat = $collectionFormat;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return mixed
@@ -152,7 +152,7 @@ trait TypePart {
 	public function getDefault() {
 		return $this->default;
 	}
-	
+
 	/**
 	 *
 	 * @param mixed $default
@@ -162,7 +162,7 @@ trait TypePart {
 		$this->default = $default;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return float
@@ -170,7 +170,7 @@ trait TypePart {
 	public function getMaximum() {
 		return $this->maximum;
 	}
-	
+
 	/**
 	 *
 	 * @param float $maximum
@@ -180,7 +180,7 @@ trait TypePart {
 		$this->maximum = $maximum;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return boolean
@@ -188,7 +188,7 @@ trait TypePart {
 	public function isExclusiveMaximum() {
 		return $this->exclusiveMaximum;
 	}
-	
+
 	/**
 	 *
 	 * @param boolean $exclusiveMaximum
@@ -198,7 +198,7 @@ trait TypePart {
 		$this->exclusiveMaximum = $exclusiveMaximum;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return float
@@ -206,7 +206,7 @@ trait TypePart {
 	public function getMinimum() {
 		return $this->minimum;
 	}
-	
+
 	/**
 	 *
 	 * @param float $minimum
@@ -216,7 +216,7 @@ trait TypePart {
 		$this->minimum = $minimum;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return boolean
@@ -224,7 +224,7 @@ trait TypePart {
 	public function isExclusiveMinimum() {
 		return $this->exclusiveMinimum;
 	}
-	
+
 	/**
 	 *
 	 * @param boolean $exclusiveMinimum
@@ -234,7 +234,7 @@ trait TypePart {
 		$this->exclusiveMinimum = $exclusiveMinimum;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return int
@@ -242,7 +242,7 @@ trait TypePart {
 	public function getMaxLength() {
 		return $this->maxLength;
 	}
-	
+
 	/**
 	 *
 	 * @param int $maxLength
@@ -252,7 +252,7 @@ trait TypePart {
 		$this->maxLength = $maxLength;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return int
@@ -260,7 +260,7 @@ trait TypePart {
 	public function getMinLength() {
 		return $this->minLength;
 	}
-	
+
 	/**
 	 *
 	 * @param int $minLength
@@ -270,7 +270,7 @@ trait TypePart {
 		$this->minLength = $minLength;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return string
@@ -278,7 +278,7 @@ trait TypePart {
 	public function getPattern() {
 		return $this->pattern;
 	}
-	
+
 	/**
 	 *
 	 * @param string $pattern
@@ -288,7 +288,7 @@ trait TypePart {
 		$this->pattern = $pattern;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return int
@@ -296,7 +296,7 @@ trait TypePart {
 	public function getMaxItems() {
 		return $this->maxItems;
 	}
-	
+
 	/**
 	 *
 	 * @param int $maxItems
@@ -306,7 +306,7 @@ trait TypePart {
 		$this->maxItems = $maxItems;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return int
@@ -314,7 +314,7 @@ trait TypePart {
 	public function getMinItems() {
 		return $this->minItems;
 	}
-	
+
 	/**
 	 *
 	 * @param int $minItems
@@ -324,7 +324,7 @@ trait TypePart {
 		$this->minItems = $minItems;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return boolean
@@ -332,7 +332,7 @@ trait TypePart {
 	public function hasUniqueItems() {
 		return $this->uniqueItems;
 	}
-	
+
 	/**
 	 *
 	 * @param boolean $uniqueItems
@@ -342,7 +342,7 @@ trait TypePart {
 		$this->uniqueItems = $uniqueItems;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return mixed
@@ -350,7 +350,7 @@ trait TypePart {
 	public function getEnum() {
 		return $this->enum;
 	}
-	
+
 	/**
 	 *
 	 * @param mixed $enum
@@ -360,7 +360,7 @@ trait TypePart {
 		$this->enum = $enum;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return float
@@ -368,7 +368,7 @@ trait TypePart {
 	public function getMultipleOf() {
 		return $this->multipleOf;
 	}
-	
+
 	/**
 	 *
 	 * @param float $multipleOf
@@ -378,8 +378,5 @@ trait TypePart {
 		$this->multipleOf = $multipleOf;
 		return $this;
 	}
-	
-	
-	
-	
+
 }

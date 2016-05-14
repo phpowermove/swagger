@@ -7,20 +7,20 @@ use phootwork\collection\Map;
 use phootwork\lang\Arrayable;
 
 class Path extends AbstractModel implements Arrayable {
-	
+
 	use ExtensionPart;
-	
+
 	private $operations;
-	
+
 	/** @var string */
 	private $path;
-	
+
 	public function __construct($path, $contents = []) {
 		$this->path = $path;
 		$this->operations = new Map();
 		$this->parse($contents);
 	}
-	
+
 	private function parse($contents) {
 		$data = CollectionUtils::toMap($contents);
 
@@ -29,15 +29,15 @@ class Path extends AbstractModel implements Arrayable {
 				$this->operations->set($method, new Operation($data->get($method)));
 			}
 		}
-		
+
 		// parts
 		$this->parseExtensions($data);
 	}
-	
+
 	public function toArray() {
 		return array_merge($this->operations->toArray(), $this->getExtensions()->toArray());
 	}
-	
+
 	/**
 	 * Returns this path
 	 * 
@@ -46,7 +46,7 @@ class Path extends AbstractModel implements Arrayable {
 	public function getPath() {
 		return $this->path;
 	}
-	
+
 	/**
 	 * Gets the operation for the given method, creates one if none exists
 	 * 
@@ -57,10 +57,10 @@ class Path extends AbstractModel implements Arrayable {
 		if (!$this->operations->has($method)) {
 			$this->operations->set($method, new Operation());
 		}
-		
+
 		return $this->operations->get($method);
 	}
-	
+
 	/**
 	 * 
 	 * @param string $method
@@ -69,7 +69,7 @@ class Path extends AbstractModel implements Arrayable {
 	public function hasOperation($method) {
 		return $this->operations->has($method);
 	}
-	
+
 	/**
 	 * Removes an operation for the given method
 	 * 

@@ -6,16 +6,16 @@ use phootwork\collection\Map;
 use gossi\swagger\Items;
 
 trait ItemsPart {
-	
+
 	/** @var */
 	private $items;
-	
+
 	private function parseItems(Map $data) {
 		if ($data->has('items')) {
 			$this->items = new Items($data->get('items'));
 		}
 	}
-	
+
 	/**
 	 * Returns the items
 	 * 
@@ -25,7 +25,7 @@ trait ItemsPart {
 		if ($this->items === null) {
 			$this->items = new Items();
 		}
-		
+
 		return $this->items;
 	}
 }

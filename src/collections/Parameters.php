@@ -50,7 +50,7 @@ class Parameters implements Arrayable, \Iterator {
 	 * @return boolean
 	 */
 	public function searchByName($name) {
-		return $this->parameters->search($name, function(Parameter $param, $name) {
+		return $this->parameters->search($name, function (Parameter $param, $name) {
 			return $param->getName() == $name;
 		});
 	}
@@ -95,7 +95,7 @@ class Parameters implements Arrayable, \Iterator {
 	 * @return boolean
 	 */
 	public function search($name, $in) {
-		return $this->parameters->search(function(Parameter $param) use ($name, $in) {
+		return $this->parameters->search(function (Parameter $param) use ($name, $in) {
 			return $param->getIn() == $in && $param->getName() == $name;
 		});
 	}

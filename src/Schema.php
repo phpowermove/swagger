@@ -14,45 +14,44 @@ use phootwork\lang\Arrayable;
 use phootwork\collection\Map;
 
 class Schema extends AbstractModel implements Arrayable {
-	
+
 	use RefPart;
 	use TypePart;
 	use DescriptionPart;
 	use ItemsPart;
 	use ExternalDocsPart;
 	use ExtensionPart;
-	
+
 	/** @var string */
 	private $discriminator;
-	
+
 	/** @var boolean */
 	private $readOnly = false;
-	
+
 	/** @var string */
 	private $title;
-	
-	
+
 	private $xml;
-	
+
 	/** @var string */
 	private $example;
-	
+
 	/** @var ArrayList|boolean */
 	private $required;
-	
+
 	/** @var Definitions */
 	private $properties;
-	
+
 	/** @var ArrayList */
 	private $allOf;
-	
+
 	/** @var Schema */
 	private $additionalProperties;
-	
+
 	public function __construct($contents = null) {
 		$this->parse($contents === null ? new Map() : $contents);
 	}
-	
+
 	private function parse($contents = []) {
 		$data = CollectionUtils::toMap($contents);
 
@@ -65,14 +64,14 @@ class Schema extends AbstractModel implements Arrayable {
 		if ($data->has('additionalProperties')) {
 			$this->additionalProperties = new Schema($data->get('additionalProperties'));
 		}
-		
+
 		$this->allOf = new ArrayList();
 		if ($data->has('allOf')) {
 			foreach ($data->get('allOf') as $schema) {
 				$this->allOf->add(new Schema($schema));
 			}
 		}
-		
+
 		// parts
 		$this->parseRef($data);
 		$this->parseType($data);
@@ -81,13 +80,13 @@ class Schema extends AbstractModel implements Arrayable {
 		$this->parseExternalDocs($data);
 		$this->parseExtensions($data);
 	}
-	
+
 	public function toArray() {
-		return $this->export('title', 'discriminator', 'description', 'readOnly', 'example', 
+		return $this->export('title', 'discriminator', 'description', 'readOnly', 'example',
 				'externalDocs', $this->getTypeExportFields(), 'items', 'required',
 				'properties', 'additionalProperties', 'allOf');
 	}
-	
+
 	/**
 	 *
 	 * @return boolean|array
@@ -95,7 +94,7 @@ class Schema extends AbstractModel implements Arrayable {
 	public function getRequired() {
 		return $this->required;
 	}
-	
+
 	/**
 	 *
 	 * @param boolean|array $required
@@ -105,7 +104,7 @@ class Schema extends AbstractModel implements Arrayable {
 		$this->required = $required;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return string
@@ -113,7 +112,7 @@ class Schema extends AbstractModel implements Arrayable {
 	public function getDiscriminator() {
 		return $this->discriminator;
 	}
-	
+
 	/**
 	 *
 	 * @param string $discriminator
@@ -122,7 +121,7 @@ class Schema extends AbstractModel implements Arrayable {
 		$this->discriminator = $discriminator;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return boolean
@@ -130,7 +129,7 @@ class Schema extends AbstractModel implements Arrayable {
 	public function isReadOnly() {
 		return $this->readOnly;
 	}
-	
+
 	/**
 	 *
 	 * @param boolean $readOnly
@@ -139,7 +138,7 @@ class Schema extends AbstractModel implements Arrayable {
 		$this->readOnly = $readOnly;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return string
@@ -147,7 +146,7 @@ class Schema extends AbstractModel implements Arrayable {
 	public function getExample() {
 		return $this->example;
 	}
-	
+
 	/**
 	 *
 	 * @param string $example
@@ -156,7 +155,7 @@ class Schema extends AbstractModel implements Arrayable {
 		$this->example = $example;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return string
@@ -164,7 +163,7 @@ class Schema extends AbstractModel implements Arrayable {
 	public function getTitle() {
 		return $this->title;
 	}
-	
+
 	/**
 	 *
 	 * @param string $title
@@ -174,7 +173,7 @@ class Schema extends AbstractModel implements Arrayable {
 		$this->title = $title;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return Definitions
@@ -182,7 +181,7 @@ class Schema extends AbstractModel implements Arrayable {
 	public function getProperties() {
 		return $this->properties;
 	}
-	
+
 	/**
 	 *
 	 * @return ArrayList
@@ -190,7 +189,7 @@ class Schema extends AbstractModel implements Arrayable {
 	public function getAllOf() {
 		return $this->allOf;
 	}
-	
+
 	/**
 	 *
 	 * @return Schema

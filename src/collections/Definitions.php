@@ -7,14 +7,14 @@ use phootwork\lang\Arrayable;
 use phootwork\collection\Map;
 
 class Definitions implements Arrayable, \Iterator {
-	
+
 	/** @var Map */
 	private $definitions;
 
 	public function __construct($contents = []) {
 		$this->parse($contents === null ? [] : $contents);
 	}
-	
+
 	private function parse($contents) {
 		$data = CollectionUtils::toMap($contents);
 
@@ -27,11 +27,11 @@ class Definitions implements Arrayable, \Iterator {
 	public function toArray() {
 		return $this->definitions->toArray();
 	}
-	
+
 	public function size() {
 		return $this->definitions->size();
 	}
-	
+
 	/**
 	 * Returns the schema for the given field
 	 * 
@@ -44,7 +44,7 @@ class Definitions implements Arrayable, \Iterator {
 		}
 		return $this->definitions->get($name);
 	}
-	
+
 	/**
 	 * Sets the field
 	 * 
@@ -54,7 +54,7 @@ class Definitions implements Arrayable, \Iterator {
 	public function set($name, Schema $schema) {
 		$this->definitions->set($name, $schema);
 	}
-	
+
 	/**
 	 * Removes the given field
 	 * 
@@ -63,7 +63,7 @@ class Definitions implements Arrayable, \Iterator {
 	public function remove($name) {
 		$this->definitions->remove($name);
 	}
-	
+
 	/**
 	 * Returns definitions has a schema with the given name
 	 * 
@@ -73,7 +73,7 @@ class Definitions implements Arrayable, \Iterator {
 	public function has($name) {
 		return $this->definitions->has($name);
 	}
-	
+
 	/**
 	 * Returns whether the given schema exists
 	 * 
@@ -83,23 +83,23 @@ class Definitions implements Arrayable, \Iterator {
 	public function contains(Schema $schema) {
 		return $this->definitions->contains($schema);
 	}
-	
+
 	public function current() {
 		return $this->definitions->current();
 	}
-	
+
 	public function key() {
 		return $this->definitions->key();
 	}
-	
+
 	public function next() {
 		return $this->definitions->next();
 	}
-	
+
 	public function rewind() {
 		return $this->definitions->rewind();
 	}
-	
+
 	public function valid() {
 		return $this->definitions->valid();
 	}

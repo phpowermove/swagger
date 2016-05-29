@@ -32,7 +32,7 @@ class Operation extends AbstractModel implements Arrayable {
 	/** @var string */
 	private $operationId;
 
-	/** @var boolean */
+	/** @var bool */
 	private $deprecated = false;
 
 	public function __construct($contents = []) {
@@ -119,7 +119,7 @@ class Operation extends AbstractModel implements Arrayable {
 
 	/**
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getDeprecated() {
 		return $this->deprecated;
@@ -127,13 +127,12 @@ class Operation extends AbstractModel implements Arrayable {
 
 	/**
 	 *
-	 * @param boolean $deprecated
+	 * @param bool $deprecated
 	 * @return $this
 	 */
 	public function setDeprecated($deprecated) {
 		$this->deprecated = $deprecated;
 		return $this;
 	}
-
 
 }

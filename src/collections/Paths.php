@@ -3,25 +3,25 @@ namespace gossi\swagger\collections;
 
 use gossi\swagger\parts\ExtensionPart;
 use gossi\swagger\Path;
+use phootwork\collection\CollectionUtils;
 use phootwork\collection\Map;
 use phootwork\lang\Arrayable;
 use phootwork\lang\Text;
-use phootwork\collection\CollectionUtils;
 
 class Paths implements Arrayable, \Iterator {
-	
+
 	use ExtensionPart;
-	
+
 	/** @var Map */
 	private $paths;
 
 	public function __construct($contents = []) {
 		$this->parse($contents === null ? [] : $contents);
 	}
-	
+
 	private function parse($contents) {
 		$data = CollectionUtils::toMap($contents);
-		
+
 		// paths
 		$this->paths = new Map();
 		foreach ($data as $p => $path) {
@@ -33,37 +33,37 @@ class Paths implements Arrayable, \Iterator {
 		// extensions
 		$this->parseExtensions($data);
 	}
-	
+
 	public function toArray() {
 		$paths = clone $this->paths;
 // 		$paths->setAll($this->getExtensions());
 		return $paths->toArray();
 	}
-	
+
 	public function size() {
 		return $this->paths->size();
 	}
-	
+
 	/**
 	 * Returns whether a path with the given name exists
 	 * 
 	 * @param string $path
-	 * @return boolean
+	 * @return bool
 	 */
 	public function has($path) {
 		return $this->paths->has($path);
 	}
-	
+
 	/**
 	 * Returns whether the given path exists
 	 * 
 	 * @param Path $path
-	 * @return boolean
+	 * @return bool
 	 */
 	public function contains(Path $path) {
 		return $this->paths->contains($path);
 	}
-	
+
 	/**
 	 * Returns the path info for the given path
 	 * 
@@ -76,7 +76,7 @@ class Paths implements Arrayable, \Iterator {
 		}
 		return $this->paths->get($path);
 	}
-	
+
 	/**
 	 * Sets the path
 	 * 
@@ -87,7 +87,7 @@ class Paths implements Arrayable, \Iterator {
 		$this->paths->set($path->getPath(), $path);
 		return $this;
 	}
-	
+
 	/**
 	 * Removes the given path
 	 * 
@@ -97,23 +97,23 @@ class Paths implements Arrayable, \Iterator {
 		$this->paths->remove($path);
 		return $this;
 	}
-	
+
 	public function current() {
 		return $this->paths->current();
 	}
-	
+
 	public function key() {
 		return $this->paths->key();
 	}
-	
+
 	public function next() {
 		return $this->paths->next();
 	}
-	
+
 	public function rewind() {
 		return $this->paths->rewind();
 	}
-	
+
 	public function valid() {
 		return $this->paths->valid();
 	}

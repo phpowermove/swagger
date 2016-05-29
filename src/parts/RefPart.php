@@ -4,18 +4,18 @@ namespace gossi\swagger\parts;
 use phootwork\collection\Map;
 
 trait RefPart {
-	
+
 	/** @var string */
 	private $ref;
-	
-	/** @var boolean */
+
+	/** @var bool */
 	private $hasRef = false;
-	
+
 	private function parseRef(Map $data) {
 		$this->ref = $data->get('$ref');
 		$this->hasRef = $data->has('$ref');
 	}
-	
+
 	/**
 	 *
 	 * @return the string
@@ -23,7 +23,7 @@ trait RefPart {
 	public function getRef() {
 		return $this->ref;
 	}
-	
+
 	/**
 	 *
 	 * @param
@@ -34,10 +34,9 @@ trait RefPart {
 		$this->hasRef = $ref !== null;
 		return $this;
 	}
-	
+
 	public function hasRef() {
 		return $this->hasRef;
 	}
-	
 
 }

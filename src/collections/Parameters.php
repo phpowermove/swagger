@@ -1,11 +1,11 @@
 <?php
 namespace gossi\swagger\collections;
 
+use gossi\swagger\Parameter;
 use gossi\swagger\parts\RefPart;
 use phootwork\collection\ArrayList;
 use phootwork\collection\CollectionUtils;
 use phootwork\lang\Arrayable;
-use gossi\swagger\Parameter;
 
 class Parameters implements Arrayable, \Iterator {
 
@@ -47,10 +47,10 @@ class Parameters implements Arrayable, \Iterator {
 	 * Searches whether a parameter with the given name exists
 	 *
 	 * @param string $name
-	 * @return boolean
+	 * @return bool
 	 */
 	public function searchByName($name) {
-		return $this->parameters->search($name, function(Parameter $param, $name) {
+		return $this->parameters->search($name, function (Parameter $param, $name) {
 			return $param->getName() == $name;
 		});
 	}
@@ -92,10 +92,10 @@ class Parameters implements Arrayable, \Iterator {
 	 *
 	 * @param string $name
 	 * @param string $id
-	 * @return boolean
+	 * @return bool
 	 */
 	public function search($name, $in) {
-		return $this->parameters->search(function(Parameter $param) use ($name, $in) {
+		return $this->parameters->search(function (Parameter $param) use ($name, $in) {
 			return $param->getIn() == $in && $param->getName() == $name;
 		});
 	}
@@ -142,7 +142,7 @@ class Parameters implements Arrayable, \Iterator {
 	 * Returns whether a given parameter exists
 	 *
 	 * @param Parameter $param
-	 * @return boolean
+	 * @return bool
 	 */
 	public function contains(Parameter $param) {
 		return $this->parameters->contains($param);

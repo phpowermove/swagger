@@ -4,25 +4,25 @@ namespace gossi\swagger\parts;
 use phootwork\collection\Map;
 
 trait RequiredPart {
-	
-	/** @var boolean */
+
+	/** @var bool */
 	private $required = false;
-	
+
 	private function parseRequired(Map $data) {
 		$this->required = $data->has('required') && $data->get('required');
 	}
-	
+
 	/**
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getRequired() {
 		return $this->required;
 	}
-	
+
 	/**
 	 *
-	 * @param boolean $required
+	 * @param bool $required
 	 * @return $this
 	 */
 	public function setRequired($required) {

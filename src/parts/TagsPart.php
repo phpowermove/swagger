@@ -1,21 +1,21 @@
 <?php
 namespace gossi\swagger\parts;
 
-use phootwork\collection\Map;
-use phootwork\collection\ArrayList;
 use gossi\swagger\Tag;
+use phootwork\collection\ArrayList;
+use phootwork\collection\Map;
 
 trait TagsPart {
-	
+
 	private $tags;
-	
+
 	private function parseTags(Map $data) {
 		$this->tags = new ArrayList();
 		foreach ($data->get('tags', []) as $t) {
 			$this->tags->add(new Tag($t));
 		}
 	}
-	
+
 	/**
 	 * Return tags
 	 *
@@ -24,7 +24,7 @@ trait TagsPart {
 	public function getTags() {
 		return $this->tags;
 	}
-	
+
 	protected function exportTags() {
 		$out = [];
 		foreach ($this->tags as $tag) {
@@ -34,7 +34,7 @@ trait TagsPart {
 				$out[] = $tag->getName();
 			}
 		}
-		
+
 		return $out;
 	}
 

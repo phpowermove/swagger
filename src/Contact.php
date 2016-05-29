@@ -6,37 +6,37 @@ use phootwork\collection\CollectionUtils;
 use phootwork\lang\Arrayable;
 
 class Contact extends AbstractModel implements Arrayable {
-	
+
 	use ExtensionPart;
-	
+
 	/** @var string */
 	private $name;
-	
+
 	/** @var string */
 	private $url;
-	
+
 	/** @var string */
 	private $email;
-	
+
 	public function __construct($contents = []) {
 		$this->parse($contents);
 	}
-	
+
 	private function parse($contents = []) {
 		$data = CollectionUtils::toMap($contents);
-	
+
 		$this->name = $data->get('name');
 		$this->url = $data->get('url');
 		$this->email = $data->get('email');
-	
+
 		// extensions
 		$this->parseExtensions($data);
 	}
-	
+
 	public function toArray() {
 		return $this->export('name', 'url', 'email');
 	}
-	
+
 	/**
 	 *
 	 * @return string
@@ -44,7 +44,7 @@ class Contact extends AbstractModel implements Arrayable {
 	public function getName() {
 		return $this->name;
 	}
-	
+
 	/**
 	 *
 	 * @param string $name
@@ -54,7 +54,7 @@ class Contact extends AbstractModel implements Arrayable {
 		$this->name = $name;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return string
@@ -62,7 +62,7 @@ class Contact extends AbstractModel implements Arrayable {
 	public function getUrl() {
 		return $this->url;
 	}
-	
+
 	/**
 	 *
 	 * @param string $url
@@ -72,7 +72,7 @@ class Contact extends AbstractModel implements Arrayable {
 		$this->url = $url;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return string
@@ -80,7 +80,7 @@ class Contact extends AbstractModel implements Arrayable {
 	public function getEmail() {
 		return $this->email;
 	}
-	
+
 	/**
 	 *
 	 * @param string $email
@@ -90,5 +90,5 @@ class Contact extends AbstractModel implements Arrayable {
 		$this->email = $email;
 		return $this;
 	}
-	
+
 }

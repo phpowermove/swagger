@@ -1,16 +1,16 @@
 <?php
 namespace gossi\swagger\tests;
 
-use gossi\swagger\Swagger;
 use gossi\swagger\collections\Definitions;
-use gossi\swagger\Schema;
-use gossi\swagger\Path;
-use gossi\swagger\collections\Paths;
-use gossi\swagger\Parameter;
 use gossi\swagger\collections\Parameters;
-use gossi\swagger\Operation;
+use gossi\swagger\collections\Paths;
 use gossi\swagger\collections\Responses;
+use gossi\swagger\Operation;
+use gossi\swagger\Parameter;
+use gossi\swagger\Path;
 use gossi\swagger\Response;
+use gossi\swagger\Schema;
+use gossi\swagger\Swagger;
 
 class CollectionsTest extends \PHPUnit_Framework_TestCase {
 

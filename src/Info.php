@@ -1,54 +1,54 @@
 <?php
 namespace gossi\swagger;
 
+use gossi\swagger\parts\DescriptionPart;
 use gossi\swagger\parts\ExtensionPart;
 use phootwork\collection\CollectionUtils;
 use phootwork\collection\Map;
 use phootwork\lang\Arrayable;
-use gossi\swagger\parts\DescriptionPart;
 
 class Info extends AbstractModel implements Arrayable {
-	
+
 	use DescriptionPart;
 	use ExtensionPart;
-	
+
 	/** @var string */
 	private $title;
-	
+
 	/** @var string */
 	private $termsOfService;
-	
+
 	/** @var Contact */
 	private $contact;
-	
+
 	/** @var License */
 	private $license;
-	
+
 	/** @var string */
 	private $version;
 
 	public function __construct($contents = []) {
 		$this->parse($contents);
 	}
-	
+
 	private function parse($contents = []) {
 		$data = CollectionUtils::toMap($contents);
-	
+
 		$this->title = $data->get('title');
 		$this->termsOfService = $data->get('termsOfService');
 		$this->contact = new Contact($data->get('contact', new Map()));
 		$this->license = new License($data->get('license', new Map()));
 		$this->version = $data->get('version');
-		
+
 		// extensions
 		$this->parseDescription($data);
 		$this->parseExtensions($data);
 	}
-	
+
 	public function toArray() {
 		return $this->export('version', 'title', 'description', 'termsOfService', 'contact', 'license');
 	}
-	
+
 	/**
 	 *
 	 * @return string
@@ -56,7 +56,7 @@ class Info extends AbstractModel implements Arrayable {
 	public function getTitle() {
 		return $this->title;
 	}
-	
+
 	/**
 	 *
 	 * @param string $title
@@ -66,7 +66,7 @@ class Info extends AbstractModel implements Arrayable {
 		$this->title = $title;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return string
@@ -74,7 +74,7 @@ class Info extends AbstractModel implements Arrayable {
 	public function getTerms() {
 		return $this->termsOfService;
 	}
-	
+
 	/**
 	 *
 	 * @param string $terms
@@ -84,7 +84,7 @@ class Info extends AbstractModel implements Arrayable {
 		$this->termsOfService = $terms;
 		return $this;
 	}
-	
+
 	/**
 	 *
 	 * @return Contact
@@ -92,7 +92,7 @@ class Info extends AbstractModel implements Arrayable {
 	public function getContact() {
 		return $this->contact;
 	}
-	
+
 	/**
 	 *
 	 * @return License
@@ -100,7 +100,7 @@ class Info extends AbstractModel implements Arrayable {
 	public function getLicense() {
 		return $this->license;
 	}
-	
+
 	/**
 	 *
 	 * @return string

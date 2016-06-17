@@ -5,8 +5,9 @@ use gossi\swagger\Header;
 use phootwork\collection\CollectionUtils;
 use phootwork\collection\Map;
 use phootwork\lang\Arrayable;
+use gossi\swagger\AbstractModel;
 
-class Headers implements Arrayable, \Iterator {
+class Headers extends AbstractModel implements Arrayable, \Iterator {
 
 	/** @var Map */
 	private $headers;
@@ -26,7 +27,7 @@ class Headers implements Arrayable, \Iterator {
 	}
 
 	public function toArray() {
-		return $this->headers->toArray();
+		return $this->exportRecursiveArray($this->headers->toArray());
 	}
 
 	public function size() {
@@ -35,7 +36,7 @@ class Headers implements Arrayable, \Iterator {
 
 	/**
 	 * Returns whether a header with the given name exists
-	 * 
+	 *
 	 * @param string $header
 	 * @return bool
 	 */
@@ -55,7 +56,7 @@ class Headers implements Arrayable, \Iterator {
 
 	/**
 	 * Returns the header info for the given code
-	 * 
+	 *
 	 * @param string $header
 	 * @return Header
 	 */
@@ -65,7 +66,7 @@ class Headers implements Arrayable, \Iterator {
 
 	/**
 	 * Sets the header
-	 * 
+	 *
 	 * @param Header $header
 	 */
 	public function add(Header $header) {
@@ -74,7 +75,7 @@ class Headers implements Arrayable, \Iterator {
 
 	/**
 	 * Removes the given header
-	 * 
+	 *
 	 * @param string $header
 	 */
 	public function remove($header) {

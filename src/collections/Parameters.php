@@ -6,8 +6,9 @@ use gossi\swagger\parts\RefPart;
 use phootwork\collection\ArrayList;
 use phootwork\collection\CollectionUtils;
 use phootwork\lang\Arrayable;
+use gossi\swagger\AbstractModel;
 
-class Parameters implements Arrayable, \Iterator {
+class Parameters extends AbstractModel implements Arrayable, \Iterator {
 
 	use RefPart;
 
@@ -36,7 +37,7 @@ class Parameters implements Arrayable, \Iterator {
 			return ['$ref' => $this->getRef()];
 		}
 
-		return $this->parameters->toArray();
+		return $this->exportRecursiveArray($this->parameters->toArray());
 	}
 
 	public function size() {

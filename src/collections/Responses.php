@@ -7,8 +7,9 @@ use phootwork\collection\CollectionUtils;
 use phootwork\collection\Map;
 use phootwork\lang\Arrayable;
 use phootwork\lang\Text;
+use gossi\swagger\AbstractModel;
 
-class Responses implements Arrayable, \Iterator {
+class Responses extends AbstractModel implements Arrayable, \Iterator {
 
 	use ExtensionPart;
 
@@ -37,7 +38,8 @@ class Responses implements Arrayable, \Iterator {
 	public function toArray() {
 		$responses = clone $this->responses;
 		$responses->setAll($this->getExtensions());
-		return $responses->toArray();
+
+		return $this->exportRecursiveArray($responses->toArray());
 	}
 
 	public function size() {
@@ -46,7 +48,7 @@ class Responses implements Arrayable, \Iterator {
 
 	/**
 	 * Returns whether the given response exists
-	 * 
+	 *
 	 * @param string $code
 	 * @return bool
 	 */
@@ -56,7 +58,7 @@ class Responses implements Arrayable, \Iterator {
 
 	/**
 	 * Returns whether the given response exists
-	 * 
+	 *
 	 * @param Response $response
 	 * @return bool
 	 */
@@ -66,7 +68,7 @@ class Responses implements Arrayable, \Iterator {
 
 	/**
 	 * Returns the reponse info for the given code
-	 * 
+	 *
 	 * @param string $code
 	 * @return Response
 	 */
@@ -80,7 +82,7 @@ class Responses implements Arrayable, \Iterator {
 
 	/**
 	 * Sets the response
-	 * 
+	 *
 	 * @param Response $code
 	 */
 	public function add(Response $response) {
@@ -89,7 +91,7 @@ class Responses implements Arrayable, \Iterator {
 
 	/**
 	 * Removes the given repsonse
-	 * 
+	 *
 	 * @param string $code
 	 */
 	public function remove($code) {

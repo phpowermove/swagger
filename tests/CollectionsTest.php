@@ -30,6 +30,8 @@ class CollectionsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame($user, $definitions->get('User'));
 		$this->assertTrue($definitions->contains($user));
 
+		$this->assertTrue(is_array($definitions->toArray()['User']));
+
 		$definitions->remove('User');
 		$this->assertEquals(0, $definitions->size());
 		$this->assertFalse($definitions->has('User'));
@@ -51,6 +53,8 @@ class CollectionsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue($paths->get('/pets') instanceof Path);
 		$this->assertSame($pets, $paths->get('/pets'));
 		$this->assertTrue($paths->contains($pets));
+
+		$this->assertTrue(is_array($paths->toArray()['/pets']));
 
 		$paths->remove('/pets');
 		$this->assertEquals(0, $paths->size());
@@ -94,6 +98,9 @@ class CollectionsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals('bar', $parameter->getName());
 		$this->assertEquals('query', $parameter->getIn());
 
+		$this->assertTrue(is_array($parameters->toArray()[0]));
+		$this->assertTrue(is_array($parameters->toArray()[1]));
+
 		$parameters->remove($id);
 		$parameters->remove($id2);
 		$parameters->remove($parameter);
@@ -120,6 +127,8 @@ class CollectionsTest extends \PHPUnit_Framework_TestCase {
 		$this->assertTrue($responses->get('200') instanceof Response);
 		$this->assertSame($ok, $responses->get('200'));
 		$this->assertTrue($responses->contains($ok));
+
+		$this->assertTrue(is_array($responses->toArray()['200']));
 
 		$responses->remove('200');
 		$this->assertEquals(0, $responses->size());

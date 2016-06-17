@@ -7,8 +7,9 @@ use phootwork\collection\CollectionUtils;
 use phootwork\collection\Map;
 use phootwork\lang\Arrayable;
 use phootwork\lang\Text;
+use gossi\swagger\AbstractModel;
 
-class Paths implements Arrayable, \Iterator {
+class Paths extends AbstractModel implements Arrayable, \Iterator {
 
 	use ExtensionPart;
 
@@ -35,9 +36,10 @@ class Paths implements Arrayable, \Iterator {
 	}
 
 	public function toArray() {
-		$paths = clone $this->paths;
+// 		$paths = clone $this->paths;
 // 		$paths->setAll($this->getExtensions());
-		return $paths->toArray();
+// 		return $paths->toArray();
+		return $this->exportRecursiveArray($this->paths->toArray());
 	}
 
 	public function size() {
@@ -46,7 +48,7 @@ class Paths implements Arrayable, \Iterator {
 
 	/**
 	 * Returns whether a path with the given name exists
-	 * 
+	 *
 	 * @param string $path
 	 * @return bool
 	 */
@@ -56,7 +58,7 @@ class Paths implements Arrayable, \Iterator {
 
 	/**
 	 * Returns whether the given path exists
-	 * 
+	 *
 	 * @param Path $path
 	 * @return bool
 	 */
@@ -66,7 +68,7 @@ class Paths implements Arrayable, \Iterator {
 
 	/**
 	 * Returns the path info for the given path
-	 * 
+	 *
 	 * @param string $path
 	 * @return Path
 	 */
@@ -79,7 +81,7 @@ class Paths implements Arrayable, \Iterator {
 
 	/**
 	 * Sets the path
-	 * 
+	 *
 	 * @param Path $path
 	 * @return $this
 	 */
@@ -90,7 +92,7 @@ class Paths implements Arrayable, \Iterator {
 
 	/**
 	 * Removes the given path
-	 * 
+	 *
 	 * @param string $path
 	 */
 	public function remove($path) {

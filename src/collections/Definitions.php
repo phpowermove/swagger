@@ -5,8 +5,9 @@ use gossi\swagger\Schema;
 use phootwork\collection\CollectionUtils;
 use phootwork\collection\Map;
 use phootwork\lang\Arrayable;
+use gossi\swagger\AbstractModel;
 
-class Definitions implements Arrayable, \Iterator {
+class Definitions extends AbstractModel implements Arrayable, \Iterator {
 
 	/** @var Map */
 	private $definitions;
@@ -25,7 +26,7 @@ class Definitions implements Arrayable, \Iterator {
 	}
 
 	public function toArray() {
-		return $this->definitions->toArray();
+		return $this->exportRecursiveArray($this->definitions->toArray());
 	}
 
 	public function size() {
@@ -34,7 +35,7 @@ class Definitions implements Arrayable, \Iterator {
 
 	/**
 	 * Returns the schema for the given field
-	 * 
+	 *
 	 * @param string $name
 	 * @return Schema
 	 */
@@ -47,7 +48,7 @@ class Definitions implements Arrayable, \Iterator {
 
 	/**
 	 * Sets the field
-	 * 
+	 *
 	 * @param string name
 	 * @param Schema $schame
 	 */
@@ -57,7 +58,7 @@ class Definitions implements Arrayable, \Iterator {
 
 	/**
 	 * Removes the given field
-	 * 
+	 *
 	 * @param string $name
 	 */
 	public function remove($name) {
@@ -66,7 +67,7 @@ class Definitions implements Arrayable, \Iterator {
 
 	/**
 	 * Returns definitions has a schema with the given name
-	 * 
+	 *
 	 * @param string $name
 	 * @return bool
 	 */
@@ -76,7 +77,7 @@ class Definitions implements Arrayable, \Iterator {
 
 	/**
 	 * Returns whether the given schema exists
-	 * 
+	 *
 	 * @param Schema $schema
 	 * @return bool
 	 */

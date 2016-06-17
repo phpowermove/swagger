@@ -35,12 +35,15 @@ class Path extends AbstractModel implements Arrayable {
 	}
 
 	public function toArray() {
-		return array_merge($this->operations->toArray(), $this->getExtensions()->toArray());
+		return array_merge(
+			$this->exportRecursiveArray($this->operations->toArray()),
+			$this->exportRecursiveArray($this->getExtensions()->toArray())
+		);
 	}
 
 	/**
 	 * Returns this path
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getPath() {
@@ -49,7 +52,7 @@ class Path extends AbstractModel implements Arrayable {
 
 	/**
 	 * Gets the operation for the given method, creates one if none exists
-	 * 
+	 *
 	 * @param string $method
 	 * @return Operation
 	 */
@@ -62,7 +65,7 @@ class Path extends AbstractModel implements Arrayable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param string $method
 	 * @return bool
 	 */
@@ -72,7 +75,7 @@ class Path extends AbstractModel implements Arrayable {
 
 	/**
 	 * Removes an operation for the given method
-	 * 
+	 *
 	 * @param string $method
 	 */
 	public function removeOperation($method) {

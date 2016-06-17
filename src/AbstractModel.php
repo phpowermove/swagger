@@ -1,6 +1,8 @@
 <?php
 namespace gossi\swagger;
 
+use phootwork\collection\Collection;
+
 abstract class AbstractModel {
 
 	protected function export() {
@@ -26,7 +28,9 @@ abstract class AbstractModel {
 				$prop->setAccessible(true);
 				$val = $prop->getValue($this);
 
-				if (method_exists($val, 'toArray')) {
+				if ($val instanceof Collection) {
+					$val = $this->exportRecursiveArray($val->toArray());
+				} else if (method_exists($val, 'toArray')) {
 					$val = $val->toArray();
 				}
 			}
@@ -41,5 +45,14 @@ abstract class AbstractModel {
 		}
 
 		return $out;
+	}
+
+	protected function exportRecursiveArray($array) {
+		return array_map(function ($v) {
+			if (is_object($v) && method_exists($v, 'toArray')) {
+				return $v->toArray();
+			}
+			return $v;
+		}, $array);
 	}
 }

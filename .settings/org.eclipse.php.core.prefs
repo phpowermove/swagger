@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
-include_path=0;/swagger
+include_path=
+phpVersion=php5.4
+useShortTags=false

@@ -27,7 +27,7 @@ class Headers extends AbstractModel implements Arrayable, \Iterator {
 	}
 
 	public function toArray() {
-		return $this->exportRecursiveArray($this->headers->toArray());
+		return CollectionUtils::toArrayRecursive($this->headers);
 	}
 
 	public function size() {
@@ -71,6 +71,17 @@ class Headers extends AbstractModel implements Arrayable, \Iterator {
 	 */
 	public function add(Header $header) {
 		$this->headers->set($header->getHeader(), $header);
+	}
+
+	/**
+	 * Sets all headers from another headers collection. Will overwrite existing ones.
+	 *
+	 * @param Headers $headers
+	 */
+	public function addAll(Headers $headers) {
+		foreach ($headers as $header) {
+			$this->add($header);
+		}
 	}
 
 	/**

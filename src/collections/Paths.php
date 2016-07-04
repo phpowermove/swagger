@@ -39,7 +39,7 @@ class Paths extends AbstractModel implements Arrayable, \Iterator {
 // 		$paths = clone $this->paths;
 // 		$paths->setAll($this->getExtensions());
 // 		return $paths->toArray();
-		return $this->exportRecursiveArray($this->paths->toArray());
+		return CollectionUtils::toArrayRecursive($this->paths);
 	}
 
 	public function size() {
@@ -88,6 +88,20 @@ class Paths extends AbstractModel implements Arrayable, \Iterator {
 	public function add(Path $path) {
 		$this->paths->set($path->getPath(), $path);
 		return $this;
+	}
+
+	/**
+	 * Adds all operations from another paths collection. Will overwrite existing operations.
+	 *
+	 * @param Paths $paths
+	 */
+	public function addAll(Paths $paths) {
+		foreach ($paths as $p) {
+			$path = $this->get($p->getPath());
+			foreach ($p->getMethods() as $method) {
+				$path->setOperation($method, $p->getOperation($method));
+			}
+		}
 	}
 
 	/**

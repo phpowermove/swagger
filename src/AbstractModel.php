@@ -2,6 +2,7 @@
 namespace gossi\swagger;
 
 use phootwork\collection\Collection;
+use phootwork\collection\CollectionUtils;
 
 abstract class AbstractModel {
 
@@ -29,7 +30,7 @@ abstract class AbstractModel {
 				$val = $prop->getValue($this);
 
 				if ($val instanceof Collection) {
-					$val = $this->exportRecursiveArray($val->toArray());
+					$val = CollectionUtils::toArrayRecursive($val);
 				} else if (method_exists($val, 'toArray')) {
 					$val = $val->toArray();
 				}
@@ -47,12 +48,4 @@ abstract class AbstractModel {
 		return $out;
 	}
 
-	protected function exportRecursiveArray($array) {
-		return array_map(function ($v) {
-			if (is_object($v) && method_exists($v, 'toArray')) {
-				return $v->toArray();
-			}
-			return $v;
-		}, $array);
-	}
 }

@@ -39,7 +39,7 @@ class Responses extends AbstractModel implements Arrayable, \Iterator {
 		$responses = clone $this->responses;
 		$responses->setAll($this->getExtensions());
 
-		return $this->exportRecursiveArray($responses->toArray());
+		return CollectionUtils::toArrayRecursive($responses);
 	}
 
 	public function size() {
@@ -87,6 +87,17 @@ class Responses extends AbstractModel implements Arrayable, \Iterator {
 	 */
 	public function add(Response $response) {
 		$this->responses->set($response->getCode(), $response);
+	}
+
+	/**
+	 * Adds all responses from another responses collection. Will overwrite existing ones.
+	 *
+	 * @param Responses $responses
+	 */
+	public function addAll(Responses $responses) {
+		foreach ($responses as $response) {
+			$this->add($response);
+		}
 	}
 
 	/**

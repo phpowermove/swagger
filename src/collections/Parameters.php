@@ -37,7 +37,7 @@ class Parameters extends AbstractModel implements Arrayable, \Iterator {
 			return ['$ref' => $this->getRef()];
 		}
 
-		return $this->exportRecursiveArray($this->parameters->toArray());
+		return CollectionUtils::toArrayRecursive($this->parameters);
 	}
 
 	public function size() {

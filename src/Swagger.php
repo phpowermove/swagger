@@ -197,7 +197,7 @@ class Swagger extends AbstractModel implements Arrayable {
 
 	/**
 	 *
-	 * @return Map
+	 * @return Definitions
 	 */
 	public function getDefinitions() {
 		return $this->definitions;
@@ -213,7 +213,7 @@ class Swagger extends AbstractModel implements Arrayable {
 
 // 	/**
 // 	 *
-// 	 * @param Map $securityDefinitions        	
+// 	 * @param Map $securityDefinitions
 // 	 */
 // 	public function setSecurityDefinitions(Map $securityDefinitions) {
 // 		$this->securityDefinitions = $securityDefinitions;

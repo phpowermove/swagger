@@ -26,7 +26,7 @@ class Definitions extends AbstractModel implements Arrayable, \Iterator {
 	}
 
 	public function toArray() {
-		return $this->exportRecursiveArray($this->definitions->toArray());
+		return CollectionUtils::toArrayRecursive($this->definitions);
 	}
 
 	public function size() {
@@ -54,6 +54,17 @@ class Definitions extends AbstractModel implements Arrayable, \Iterator {
 	 */
 	public function set($name, Schema $schema) {
 		$this->definitions->set($name, $schema);
+	}
+
+	/**
+	 * Sets all definitions from another definitions collection. Will overwrite existing ones.
+	 *
+	 * @param Definitions $definitions
+	 */
+	public function setAll(Definitions $definitions) {
+		foreach ($definitions as $name => $schema) {
+			$this->set($name, $schema);
+		}
 	}
 
 	/**

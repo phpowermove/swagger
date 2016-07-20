@@ -2,6 +2,7 @@
 namespace gossi\swagger\parts;
 
 use gossi\swagger\Schema;
+use gossi\swagger\util\MergeHelper;
 use phootwork\collection\Map;
 
 trait SchemaPart {
@@ -11,6 +12,10 @@ trait SchemaPart {
 
 	private function parseSchema(Map $data) {
 		$this->schema = new Schema($data->get('schema'));
+	}
+
+	private function mergeSchema(static $model, $overwrite = false) {
+		$this->schema->merge($model->schema, $overwrite);
 	}
 
 	/**

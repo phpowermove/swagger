@@ -3,6 +3,7 @@
 namespace gossi\swagger\parts;
 
 use gossi\swagger\Items;
+use gossi\swagger\util\MergeHelper;
 use phootwork\collection\Map;
 
 trait ItemsPart {
@@ -16,9 +17,17 @@ trait ItemsPart {
 		}
 	}
 
+	private function mergeItems(static $model, $overwrite = false) {
+		if (null === $this->items) {
+			$this->items = clone $model->items;
+		} elseif (null !== $model->items) {
+			$this->items->merge($model->items, $overwrite);
+		}
+	}
+
 	/**
 	 * Returns the items
-	 * 
+	 *
 	 * @return Items
 	 */
 	public function getItems() {

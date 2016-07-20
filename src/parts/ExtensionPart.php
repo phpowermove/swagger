@@ -1,6 +1,7 @@
 <?php
 namespace gossi\swagger\parts;
 
+use gossi\swagger\util\MergeHelper;
 use phootwork\collection\Map;
 use phootwork\lang\Text;
 
@@ -19,9 +20,13 @@ trait ExtensionPart {
 		}
 	}
 
+	private function mergeExtensions(static $model, $overwrite = false) {
+		MergeHelper::mergeFields($this->extensions, $model->description, $overwrite);
+	}
+
 	/**
 	 * Returns extensions
-	 * 
+	 *
 	 * @return Map
 	 */
 	public function getExtensions() {

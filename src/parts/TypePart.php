@@ -1,6 +1,7 @@
 <?php
 namespace gossi\swagger\parts;
 
+use gossi\swagger\util\MergeHelper;
 use phootwork\collection\Map;
 
 trait TypePart {
@@ -21,13 +22,13 @@ trait TypePart {
 	private $maximum;
 
 	/** @var bool */
-	private $exclusiveMaximum = false;
+	private $exclusiveMaximum;
 
 	/** @var float */
 	private $minimum;
 
 	/** @var bool */
-	private $exclusiveMinimum = false;
+	private $exclusiveMinimum;
 
 	/** @var int */
 	private $maxLength;
@@ -59,17 +60,36 @@ trait TypePart {
 		$this->collectionFormat = $data->get('collectionFormat');
 		$this->default = $data->get('default');
 		$this->maximum = $data->get('maximum');
-		$this->exclusiveMaximum = $data->has('exclusiveMaximum') && $data->get('exclusiveMaximum');
+		$this->exclusiveMaximum = $data->get('exclusiveMaximum');
 		$this->minimum = $data->get('minimum');
-		$this->exclusiveMinimum = $data->has('exclusiveMinimum') && $data->get('exclusiveMinimum');
+		$this->exclusiveMinimum = $data->get('exclusiveMinimum');
 		$this->maxLength = $data->get('maxLength');
 		$this->minLength = $data->get('minLength');
 		$this->pattern = $data->get('pattern');
 		$this->maxItems = $data->get('maxItems');
 		$this->minItems = $data->get('minItems');
-		$this->uniqueItems = $data->has('uniqueItems') && $data->get('uniqueItems');
+		$this->uniqueItems = $data->get('uniqueItems');
 		$this->enum = $data->get('enum');
 		$this->multipleOf = $data->get('multipleOf');
+	}
+
+	private function mergeType(static $model, $overwrite = false) {
+		MergeHelper::mergeFields($this->type, $model->type, $overwrite);
+		MergeHelper::mergeFields($this->format, $model->format, $overwrite);
+		MergeHelper::mergeFields($this->collectionFormat, $model->collectionFormat, $overwrite);
+		MergeHelper::mergeFields($this->default, $model->default, $overwrite);
+		MergeHelper::mergeFields($this->maximum, $model->maximum, $overwrite);
+		MergeHelper::mergeFields($this->exclusiveMaximum, $model->exclusiveMaximum, $overwrite);
+		MergeHelper::mergeFields($this->minimum, $model->minimum, $overwrite);
+		MergeHelper::mergeFields($this->exclusiveMinimum, $model->exclusiveMinimum, $overwrite);
+		MergeHelper::mergeFields($this->maxLength, $model->maxLength, $overwrite);
+		MergeHelper::mergeFields($this->minLength, $model->minLength, $overwrite);
+		MergeHelper::mergeFields($this->pattern, $model->pattern, $overwrite);
+		MergeHelper::mergeFields($this->maxItems, $model->maxItems, $overwrite);
+		MergeHelper::mergeFields($this->minItems, $model->minItems, $overwrite);
+		MergeHelper::mergeFields($this->uniqueItems, $model->uniqueItems, $overwrite);
+		MergeHelper::mergeFields($this->enum, $model->enum, $overwrite);
+		MergeHelper::mergeFields($this->multipleOf, $model->multipleOf, $overwrite);
 	}
 
 	private function getTypeExportFields() {
@@ -126,17 +146,17 @@ trait TypePart {
 
 	/**
 	 * Determines the format of the array if type array is used. Possible values are:
-	 * 
+	 *
 	 * - `csv` - comma separated values `foo,bar`.
 	 * - `ssv` - space separated values `foo bar`.
 	 * - `tsv` - tab separated values `foo\tbar`.
 	 * - `pipes` - pipe separated values `foo|bar`.
-	 * - `multi` - corresponds to multiple parameter instances instead of multiple values for a 
+	 * - `multi` - corresponds to multiple parameter instances instead of multiple values for a
 	 * single instance `foo=bar&foo=baz`. This is valid only for parameters in "query" or "formData".
-	 * 
+	 *
 	 * Default value is `csv`.
-	 * 
-	 * 
+	 *
+	 *
 	 * @param string $collectionFormat
 	 * @return $this
 	 */
@@ -186,7 +206,7 @@ trait TypePart {
 	 * @return bool
 	 */
 	public function isExclusiveMaximum() {
-		return $this->exclusiveMaximum;
+		return null !== $this->exclusiveMaximum ? $this->exclusiveMaximum : false;
 	}
 
 	/**
@@ -222,7 +242,7 @@ trait TypePart {
 	 * @return bool
 	 */
 	public function isExclusiveMinimum() {
-		return $this->exclusiveMinimum;
+		return null !== $this->exclusiveMinimum ? $this->exclusiveMinimum : false;
 	}
 
 	/**

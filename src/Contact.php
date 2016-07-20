@@ -2,6 +2,7 @@
 namespace gossi\swagger;
 
 use gossi\swagger\parts\ExtensionPart;
+use gossi\swagger\util\MergeHelper;
 use phootwork\collection\CollectionUtils;
 use phootwork\lang\Arrayable;
 
@@ -31,6 +32,17 @@ class Contact extends AbstractModel implements Arrayable {
 
 		// extensions
 		$this->parseExtensions($data);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function merge(static $model, $overwrite = false) {
+		MergeHelper::mergeFields($this->name, $model->name, $overwrite);
+		MergeHelper::mergeFields($this->url, $model->url, $overwrite);
+		MergeHelper::mergeFields($this->email, $model->email, $overwrite);
+
+		$this->mergeExtensions($model, $overwrite);
 	}
 
 	public function toArray() {

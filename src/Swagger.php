@@ -121,7 +121,7 @@ class Swagger extends AbstractModel implements Arrayable {
 
 	public function toArray() {
 		return $this->export('swagger', 'info', 'host', 'basePath', 'schemes', 'consumes', 'produces',
-			'paths', 'definitions', 'parameters', 'responses', 'tags', 'externalDocs'
+			'securityDefinitions', 'paths', 'definitions', 'parameters', 'responses', 'tags', 'externalDocs'
 		);
 	}
 

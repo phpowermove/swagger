@@ -1,10 +1,15 @@
 <?php
 namespace gossi\swagger;
 
-class SecurityScheme {
+use phootwork\lang\Arrayable;
+
+class SecurityScheme extends AbstractModel implements Arrayable {
 
 	/** @var string */
 	private $name;
+
+	/** @var string */
+	private $type;
 
 	public function __construct($name, $contents = []) {
 		$this->name = $name;
@@ -12,6 +17,10 @@ class SecurityScheme {
 	}
 
 	private function parse($contents = []) {
+		$this->type = $contents->get('type');
+	}
 
+	public function toArray() {
+		return $this->export('type');
 	}
 }

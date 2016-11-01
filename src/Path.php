@@ -2,12 +2,15 @@
 namespace gossi\swagger;
 
 use gossi\swagger\parts\ExtensionPart;
+use gossi\swagger\parts\ParametersPart;
 use phootwork\collection\CollectionUtils;
 use phootwork\collection\Map;
+use phootwork\collection\Set;
 use phootwork\lang\Arrayable;
 
 class Path extends AbstractModel implements Arrayable {
 
+    use ParametersPart;
 	use ExtensionPart;
 
 	private $operations;
@@ -30,8 +33,9 @@ class Path extends AbstractModel implements Arrayable {
 			}
 		}
 
-		// parts
-		$this->parseExtensions($data);
+        // parts
+        $this->parseParameters($data);
+        $this->parseExtensions($data);
 	}
 
 	public function toArray() {

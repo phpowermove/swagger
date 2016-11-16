@@ -8,6 +8,7 @@ use gossi\swagger\parts\ParametersPart;
 use gossi\swagger\parts\ProducesPart;
 use gossi\swagger\parts\ResponsesPart;
 use gossi\swagger\parts\SchemesPart;
+use gossi\swagger\parts\SecurityPart;
 use gossi\swagger\parts\TagsPart;
 use phootwork\collection\CollectionUtils;
 use phootwork\lang\Arrayable;
@@ -17,6 +18,7 @@ class Operation extends AbstractModel implements Arrayable {
 	use ConsumesPart;
 	use ProducesPart;
 	use TagsPart;
+	use SecurityPart;
 	use ParametersPart;
 	use ResponsesPart;
 	use SchemesPart;
@@ -51,6 +53,7 @@ class Operation extends AbstractModel implements Arrayable {
 		$this->parseConsumes($data);
 		$this->parseProduces($data);
 		$this->parseTags($data);
+		$this->parseSecurity($data);
 		$this->parseParameters($data);
 		$this->parseResponses($data);
 		$this->parseSchemes($data);
@@ -60,8 +63,8 @@ class Operation extends AbstractModel implements Arrayable {
 
 	public function toArray() {
 		return $this->export('summary', 'description', 'operationId', 'deprecated',
-				'consumes', 'produces', 'parameters', 'responses', 'schemes', 'tags',
-				'externalDocs');
+				'consumes', 'produces', 'security', 'parameters', 'responses', 'schemes',
+				'tags', 'externalDocs');
 	}
 
 	/**

@@ -17,6 +17,8 @@ use phootwork\file\exception\FileNotFoundException;
 use phootwork\file\File;
 use phootwork\json\Json;
 use phootwork\lang\Arrayable;
+use gossi\swagger\collections\SecurityDefinitions;
+use gossi\swagger\parts\SecurityPart;
 
 class Swagger extends AbstractModel implements Arrayable {
 
@@ -28,6 +30,7 @@ class Swagger extends AbstractModel implements Arrayable {
 	use ResponsesPart;
 	use ExternalDocsPart;
 	use ExtensionPart;
+	use SecurityPart;
 
 	const T_INTEGER = 'integer';
 	const T_NUMBER = 'number';
@@ -66,7 +69,7 @@ class Swagger extends AbstractModel implements Arrayable {
 	/** @var Definitions */
 	private $definitions;
 
-	/** @var Map */
+	/** @var SecurityDefinitions */
 	private $securityDefinitions;
 
 	/**
@@ -101,12 +104,7 @@ class Swagger extends AbstractModel implements Arrayable {
 		$this->info = new Info($data->get('info', []));
 		$this->paths = new Paths($data->get('paths'));
 		$this->definitions = new Definitions($data->get('definitions', new Map()));
-
-		// security schemes
-		$this->securityDefinitions = $data->get('securityDefinitions', new Map());
-		foreach ($this->securityDefinitions as $s => $def) {
-			$this->securityDefinitions->set($s, new SecurityScheme($s, $def));
-		}
+		$this->securityDefinitions = new SecurityDefinitions($data->get('securityDefinitions', new Map()));
 
 		// parts
 		$this->parseSchemes($data);
@@ -115,13 +113,15 @@ class Swagger extends AbstractModel implements Arrayable {
 		$this->parseTags($data);
 		$this->parseParameters($data);
 		$this->parseResponses($data);
+		$this->parseSecurity($data);
 		$this->parseExternalDocs($data);
 		$this->parseExtensions($data);
 	}
 
 	public function toArray() {
 		return $this->export('swagger', 'info', 'host', 'basePath', 'schemes', 'consumes', 'produces',
-			'securityDefinitions', 'paths', 'definitions', 'parameters', 'responses', 'tags', 'externalDocs'
+			'paths', 'definitions', 'parameters', 'responses', 'securityDefinitions', 'security', 
+			'tags', 'externalDocs'
 		);
 	}
 
@@ -205,19 +205,10 @@ class Swagger extends AbstractModel implements Arrayable {
 
 	/**
 	 *
-	 * @return Map
+	 * @return SecurityDefinitions
 	 */
 	public function getSecurityDefinitions() {
 		return $this->securityDefinitions;
 	}
-
-// 	/**
-// 	 *
-// 	 * @param Map $securityDefinitions
-// 	 */
-// 	public function setSecurityDefinitions(Map $securityDefinitions) {
-// 		$this->securityDefinitions = $securityDefinitions;
-// 		return $this;
-// 	}
 
 }

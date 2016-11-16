@@ -1,0 +1,23 @@
+{
+	"swagger": "2.0",
+	"securityDefinitions": {
+  		"OauthSecurity": {
+    		"type": "oauth2",
+    		"flow": "accessCode",
+    		"authorizationUrl": "https://oauth.simple.api/authorization",
+    		"tokenUrl": "https://oauth.simple.api/token",
+    		"scopes": {
+      			"admin": "Admin scope",
+      			"user": "User scope"
+      		}
+      	},
+		"MediaSecurity": {
+    		"type": "apiKey",
+    		"in": "query",
+    		"name": "media-api-key"
+    	},
+		"LegacySecurity": {
+			"type": "basic"
+		}
+	}
+}

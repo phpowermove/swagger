@@ -2,30 +2,22 @@
 namespace gossi\swagger\parts;
 
 use phootwork\collection\Map;
+use gossi\swagger\collections\SecurityRequirements;
 
 trait SecurityPart {
 
-	/** @var object */
+	/** @var SecurityRequirements */
 	private $security;
 
 	private function parseSecurity(Map $data) {
-		$this->security = $data->get('security');
+		$this->security = new SecurityRequirements($data->get('security'));
 	}
 
 	/**
-	 * @return object
+	 * @return SecurityRequirements
 	 */
 	public function getSecurity() {
 		return $this->security;
-	}
-
-	/**
-	 * @param object $security
-	 * @return $this
-	 */
-	public function setSecurity($security) {
-		$this->security = $security;
-		return $this;
 	}
 
 }

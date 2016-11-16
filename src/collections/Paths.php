@@ -36,9 +36,6 @@ class Paths extends AbstractModel implements Arrayable, \Iterator {
 	}
 
 	public function toArray() {
-// 		$paths = clone $this->paths;
-// 		$paths->setAll($this->getExtensions());
-// 		return $paths->toArray();
 		return CollectionUtils::toArrayRecursive($this->paths);
 	}
 

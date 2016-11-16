@@ -31,7 +31,7 @@ abstract class AbstractModel {
 
 				if ($val instanceof Collection) {
 					$val = CollectionUtils::toArrayRecursive($val);
-				} else if (method_exists($val, 'toArray')) {
+				} else if (is_object($val) && method_exists($val, 'toArray')) {
 					$val = $val->toArray();
 				}
 			}

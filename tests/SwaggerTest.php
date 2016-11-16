@@ -2,6 +2,7 @@
 namespace gossi\swagger\tests;
 
 use gossi\swagger\Swagger;
+use gossi\swagger\Schema;
 
 class SwaggerTest extends \PHPUnit_Framework_TestCase {
 
@@ -25,5 +26,14 @@ class SwaggerTest extends \PHPUnit_Framework_TestCase {
 			'host' => 'http://example.com',
 			'basePath' => '/api'
 		], $swagger->toArray());
+	}
+	
+	public function testExport() {
+		require_once __DIR__ . '/fixtures/Email.php';
+
+		$endpoint = new Schema();
+		$endpoint->setDescription('Email');
+		
+		$this->assertNotEmpty($endpoint->toArray());
 	}
 }

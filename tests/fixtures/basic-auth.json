@@ -10,26 +10,26 @@
 		"http",
 		"https"
 	],
-	"securityDefinitions": {
-		"basicAuth": {
-			"type": "basic",
-			"description": "HTTP Basic Authentication. Works over `HTTP` and `HTTPS`"
-		}
-	},
 	"paths": {
 		"/": {
 			"get": {
-				"security": [
-					{
-						"basicAuth": []
-					}
-				],
 				"responses": {
 					"200": {
 						"description": "Will send `Authenticated` if authentication is succesful, otherwise it will send `Unauthorized`"
 					}
-				}
+				},
+				"security": [
+					{
+						"basicAuth": []
+					}
+				]
 			}
+		}
+	},
+	"securityDefinitions": {
+		"basicAuth": {
+			"type": "basic",
+			"description": "HTTP Basic Authentication. Works over `HTTP` and `HTTPS`"
 		}
 	}
 }

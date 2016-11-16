@@ -53,18 +53,18 @@ class Operation extends AbstractModel implements Arrayable {
 		$this->parseConsumes($data);
 		$this->parseProduces($data);
 		$this->parseTags($data);
-		$this->parseSecurity($data);
 		$this->parseParameters($data);
 		$this->parseResponses($data);
 		$this->parseSchemes($data);
+		$this->parseSecurity($data);
 		$this->parseExternalDocs($data);
 		$this->parseExtensions($data);
 	}
 
 	public function toArray() {
 		return $this->export('summary', 'description', 'operationId', 'deprecated',
-				'consumes', 'produces', 'security', 'parameters', 'responses', 'schemes',
-				'tags', 'externalDocs');
+				'consumes', 'produces', 'parameters', 'responses', 'schemes',
+				'security', 'tags', 'externalDocs');
 	}
 
 	/**

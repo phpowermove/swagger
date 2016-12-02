@@ -1,6 +1,7 @@
 <?php
 namespace gossi\swagger\parts;
 
+use gossi\swagger\util\MergeHelper;
 use phootwork\collection\Map;
 
 trait RefPart {
@@ -8,12 +9,12 @@ trait RefPart {
 	/** @var string */
 	private $ref;
 
-	/** @var bool */
-	private $hasRef = false;
-
 	private function parseRef(Map $data) {
 		$this->ref = $data->get('$ref');
-		$this->hasRef = $data->has('$ref');
+	}
+
+	private function mergeRef(static $model, $overwrite = false) {
+		MergeHelper::mergeFields($this->ref, $model->ref, $overwrite);
 	}
 
 	/**
@@ -31,12 +32,11 @@ trait RefPart {
 	 */
 	public function setRef($ref) {
 		$this->ref = $ref;
-		$this->hasRef = $ref !== null;
 		return $this;
 	}
 
 	public function hasRef() {
-		return $this->hasRef;
+		return null !== $this->ref;
 	}
 
 }

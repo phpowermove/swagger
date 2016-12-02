@@ -19,9 +19,9 @@ class Header extends AbstractModel implements Arrayable {
 	/** @var string */
 	private $header;
 
-	public function __construct($header, $contents = null) {
+	public function __construct($header, $contents = []) {
 		$this->header = $header;
-		$this->parse($contents === null ? new Map() : $contents);
+		$this->parse($contents);
 	}
 
 	private function parse($contents = []) {
@@ -34,13 +34,27 @@ class Header extends AbstractModel implements Arrayable {
 		$this->parseExtensions($data);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
+	public function merge(static $model, $overwrite = false) {
+		if ($this->header !== $model->header) {
+			throw new \InvalidArgumentException(sprintf('You can\'t merge two different headers (provided "%s" and "%s").', $this->header, $model->header));
+		}
+
+		$this->mergeDescription($model, $overwrite);
+		$this->mergeType($model, $overwrite);
+		$this->mergeItems($model, $overwrite);
+		$this->mergeExtensions($model, $overwrite);
+	}
+
 	public function toArray() {
 		return $this->export('description', $this->getTypeExportFields(), 'items');
 	}
 
 	/**
 	 * Returns the header
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getHeader() {

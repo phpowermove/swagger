@@ -1,6 +1,7 @@
 <?php
 namespace gossi\swagger\parts;
 
+use gossi\swagger\util\MergeHelper;
 use phootwork\collection\ArrayList;
 use phootwork\collection\Map;
 
@@ -10,6 +11,10 @@ trait SchemesPart {
 
 	private function parseSchemes(Map $data) {
 		$this->schemes = $data->get('schemes', new ArrayList());
+	}
+
+	private function mergeSchemes(static $model, $overwrite = false) {
+		$this->schemes->addAll($model->schemes);
 	}
 
 	/**

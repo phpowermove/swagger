@@ -12,6 +12,10 @@ trait ExternalDocsPart {
 		$this->externalDocs = new ExternalDocs($data->get('externalDocs', new Map()));
 	}
 
+	private function mergeExternalDocs(static $model, $overwrite = false) {
+		$this->externalDocs->merge($model->externalDocs, $overwrite);
+	}
+
 	/**
 	 *
 	 * @return ExternalDocs
@@ -22,8 +26,8 @@ trait ExternalDocsPart {
 
 	/**
 	 *
-	 * @param ExternalDocs $externalDocs   
-	 * @return $this     	
+	 * @param ExternalDocs $externalDocs
+	 * @return $this
 	 */
 	public function setExternalDocs(ExternalDocs $externalDocs) {
 		$this->externalDocs = $externalDocs;

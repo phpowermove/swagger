@@ -26,6 +26,15 @@ class ExternalDocs extends AbstractModel implements Arrayable {
 		$this->parseExtensions($data);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
+	public function merge(static $model, $overwrite = false) {
+		$this->mergeDescription($model, $overwrite);
+		$this->mergeUrl($model, $overwrite);
+		$this->mergeExtensions($model, $overwrite);
+	}
+
 	public function toArray() {
 		return $this->export('description', 'url');
 	}

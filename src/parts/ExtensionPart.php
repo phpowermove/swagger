@@ -14,7 +14,7 @@ trait ExtensionPart {
 		foreach ($data as $k => $v) {
 			$key = new Text($k);
 			if ($key->startsWith('x-')) {
-				$this->extensions->set($key->substring(2), $v);
+				$this->extensions->set((string) $key->substring(2), $v);
 			}
 		}
 	}

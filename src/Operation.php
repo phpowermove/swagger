@@ -69,7 +69,7 @@ class Operation extends AbstractModel implements Arrayable {
 
 	/**
 	 *
-	 * @return the string
+	 * @return string
 	 */
 	public function getSummary() {
 		return $this->summary;

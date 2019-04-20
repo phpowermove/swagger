@@ -18,7 +18,7 @@ trait RefPart {
 
 	/**
 	 *
-	 * @return the string
+	 * @return string
 	 */
 	public function getRef() {
 		return $this->ref;
